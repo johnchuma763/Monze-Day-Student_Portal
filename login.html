@@ -1,1 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Login | Monze Day Secondary School</title>
 
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            font-family: Arial, sans-serif;
+            background: #f0f4f8;
+        }
+
+        .login-card {
+            width: 100%;
+            max-width: 420px;
+            padding: 35px;
+            background: white;
+            border-radius: 16px;
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        .school-logo {
+            width: 65px;
+            height: 65px;
+            display: grid;
+            place-items: center;
+            margin: 0 auto 15px;
+            border-radius: 16px;
+            background: #123b2c;
+            color: white;
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+        h1 {
+            margin-bottom: 8px;
+            text-align: center;
+            color: #123b2c;
+            font-size: 25px;
+        }
+
+        .subtitle {
+            margin-bottom: 28px;
+            text-align: center;
+            color: #64748b;
+            line-height: 1.5;
+        }
+
+        label {
+            display: block;
+            margin: 16px 0 7px;
+            font-weight: bold;
+            color: #334155;
+        }
+
+        input {
+            width: 100%;
+            padding: 13px;
+            border: 1px solid #cbd5e1;
+            border-radius: 8px;
+            font-size: 16px;
+        }
+
+        input:focus {
+            outline: 2px solid #16845b;
+            border-color: #16845b;
+        }
+
+        button {
+            width: 100%;
+            margin-top: 24px;
+            padding: 14px;
+            border: none;
+            border-radius: 8px;
+            background: #16845b;
+            color: white;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        button:disabled {
+            opacity: 0.6;
+            cursor: wait;
+        }
+
+        #message {
+            margin-top: 16px;
+            text-align: center;
+            line-height: 1.5;
+        }
+
+        .back-link {
+            display: block;
+            margin-top: 22px;
+            text-align: center;
+            color: #16845b;
+            text-decoration: none;
+        }
+    </style>
+</head>
+
+<body>
+    <main class="login-card">
+        <div class="school-logo">MD</div>
+
+        <h1>Student Login</h1>
+
+        <p class="subtitle">
+            Monze Day Secondary School<br>
+            Sign in to access your student account.
+        </p>
+
+        <form id="loginForm">
+            <label for="email">Email Address</label>
+            <input
+                type="email"
+                id="email"
+                autocomplete="username"
+                placeholder="Enter your school email"
+                required
+            >
+
+            <label for="password">Password</label>
+            <input
+                type="password"
+                id="password"
+                autocomplete="current-password"
+                placeholder="Enter your password"
+                required
+            >
+
+            <button type="submit" id="loginButton">
+                Sign In
+            </button>
+
+            <p id="message" role="status" aria-live="polite"></p>
+        </form>
+
+        <a class="back-link" href="index.html">
+            ← Back to Homepage
+        </a>
+    </main>
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+    <script>
+        const SUPABASE_URL = "YOUR_SUPABASE_PROJECT_URL";
+        const SUPABASE_PUBLISHABLE_KEY = "YOUR_SUPABASE_PUBLISHABLE_KEY";
+
+        const message = document.getElementById("message");
+        const loginButton = document.getElementById("loginButton");
+
+        const configured =
+            SUPABASE_URL.startsWith("https://") &&
+            SUPABASE_PUBLISHABLE_KEY.startsWith("sb_publishable_");
+
+        const client = configured
+            ? window.supabase.createClient(
+                SUPABASE_URL,
+                SUPABASE_PUBLISHABLE_KEY
+            )
+            : null;
+
+        document.getElementById("loginForm").addEventListener(
+            "submit",
+            async function (event) {
+                event.preventDefault();
+
+                if (!client) {
+                    message.textContent =
+                        "Login setup is incomplete. Please configure Supabase first.";
+                    return;
+                }
+
+                loginButton.disabled = true;
+                loginButton.textContent = "Signing in...";
+                message.textContent = "";
+
+                try {
+                    const { data, error } = await client.auth.signInWithPassword({
+                        email: document.getElementById("email").value.trim(),
+                        password: document.getElementById("password").value
+                    });
+
+                    if (error) {
+                        throw error;
+                    }
+
+                    if (!data.session) {
+                        message.textContent =
+                            "Sign-in needs further verification. Please check your email.";
+                        return;
+                    }
+
+                    message.textContent =
+                        "Login successful! Your account is signed in.";
+                } catch (error) {
+                    message.textContent =
+                        "Unable to sign in. Check your email and password, then try again.";
+                } finally {
+                    loginButton.disabled = false;
+                    loginButton.textContent = "Sign In";
+                }
+            }
+        );
+    </script>
+</body>
+  </html>
