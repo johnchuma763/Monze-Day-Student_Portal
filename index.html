@@ -3,107 +3,116 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
     <title>Monze Day Secondary School | Student Portal</title>
+    <meta name="description" content="Official student portal for Monze Day Secondary School. Access school announcements, student information and academic results.">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <header class="header">
+        <div class="brand">
+            <div class="logo">MD</div>
+            <div>
+                <h2>Monze Day Secondary School</h2>
+                <p>Student Portal</p>
+            </div>
+        </div>
 
-    <meta name="description"
-          content="Official student portal for Monze Day Secondary School. Access school announcements, student information and academic results.">
+        <nav aria-label="Main navigation">
+            <a href="#home">Home</a>
+            <a href="#about">About</a>
+            <a href="#results">Results</a>
+            <a href="#calendar">Calendar</a>
+            <a href="#contact">Contact</a>
+        </nav>
 
-    <style>
-        :root {
-            --primary: #123c72;
-            --primary-dark: #09264b;
-            --secondary: #f5b82e;
-            --background: #f4f7fb;
-            --white: #ffffff;
-            --text: #243247;
-            --muted: #66758a;
-            --border: #e5eaf1;
-            --shadow: 0 8px 30px rgba(18, 60, 114, 0.08);
-        }
+        <a href="login.html" class="button-link">Student Login</a>
+    </header>
 
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+    <main id="home">
+        <section class="hero">
+            <div>
+                <span class="tag">STUDENT PORTAL</span>
+                <h1>Learn, grow, and succeed with confidence.</h1>
+                <p>
+                    Access school announcements, academic records, class updates and important
+                    student information in one secure place.
+                </p>
 
-        html {
-            scroll-behavior: smooth;
-        }
+                <div class="actions">
+                    <a href="login.html" class="primary-btn">Access Portal</a>
+                    <a href="#results" class="secondary-btn">View Results</a>
+                </div>
 
-        body {
-            font-family: Arial, Helvetica, sans-serif;
-            background: var(--background);
-            color: var(--text);
-            line-height: 1.7;
-        }
+                <div class="mini-stats">
+                    <div>
+                        <strong>1,200+</strong>
+                        <span>Students</span>
+                    </div>
+                    <div>
+                        <strong>98%</strong>
+                        <span>Attendance</span>
+                    </div>
+                    <div>
+                        <strong>24</strong>
+                        <span>Subjects</span>
+                    </div>
+                </div>
+            </div>
 
-        a {
-            text-decoration: none;
-        }
+            <div class="panel-card" aria-label="Today's highlights">
+                <h3>Today's Highlights</h3>
+                <ul>
+                    <li><span class="dot blue"></span> Assembly starts at 7:45 AM</li>
+                    <li><span class="dot gold"></span> Science Fair registration open</li>
+                    <li><span class="dot green"></span> Mid-term reports available</li>
+                    <li><span class="dot purple"></span> Extra lessons for Grade 10</li>
+                </ul>
+            </div>
+        </section>
 
-        .container {
-            width: min(1120px, 90%);
-            margin: auto;
-        }
+        <section class="info-grid" id="about">
+            <article class="info-card">
+                <h3>Academic Support</h3>
+                <p>Personalised tutoring and well-structured lesson plans that keep every learner progressing.</p>
+            </article>
+            <article class="info-card">
+                <h3>School life</h3>
+                <p>Clubs, sports and community activities that help students build confidence and leadership.</p>
+            </article>
+            <article class="info-card">
+                <h3>Safe Learning</h3>
+                <p>Strong guidance, secure services and communication channels to support the whole school community.</p>
+            </article>
+        </section>
 
-        /* TOP BAR */
+        <section class="notice-section" id="results">
+            <div class="section-heading">
+                <span class="tag alt">ANNOUNCEMENTS</span>
+                <h2>Important updates</h2>
+            </div>
 
-        .topbar {
-            background: var(--primary-dark);
-            color: white;
-            padding: 9px 0;
-            font-size: 13px;
-        }
+            <div class="notice-grid">
+                <div class="notice-card">
+                    <h3>Term 2 Results</h3>
+                    <p>Progress reports and exam results are now available from the student portal for all learners.</p>
+                </div>
+                <div class="notice-card">
+                    <h3>School Calendar</h3>
+                    <p>Follow school events, activity days and examination schedules throughout the academic year.</p>
+                </div>
+                <div class="notice-card">
+                    <h3>Student Support</h3>
+                    <p>Students can access counselling, academic guidance and mentorship support from the school office.</p>
+                </div>
+            </div>
+        </section>
+    </main>
 
-        .topbar-content {
-            display: flex;
-            justify-content: space-between;
-            gap: 12px;
-            flex-wrap: wrap;
-        }
+    <footer class="footer" id="contact">
+        <p>Monze Day Secondary School • Student Portal</p>
+    </footer>
 
-        /* NAVIGATION */
+    <script src="js/script.js" defer></script>
+</body>
+</html>
 
-        header {
-            background: white;
-            position: sticky;
-            top: 0;
-            z-index: 100;
-            box-shadow: 0 3px 15px rgba(0, 0, 0, 0.05);
-        }
-
-        .navbar {
-            min-height: 84px;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            gap: 20px;
-        }
-
-        .brand {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            color: var(--primary);
-            min-width: 0;
-        }
-
-        .school-logo {
-            width: 52px;
-            height: 52px;
-            border-radius: 14px;
-            background: var(--primary);
-            color: white;
-            display: grid;
-            place-items: center;
-            font-size: 23px;
-            font-weight: bold;
-            border-bottom: 4px solid var(--secondary);
-            flex-shrink: 0;
-        }
-
-        .brand h2 {
-            font-size: 17px;
-           

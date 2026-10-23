@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Teacher Dashboard | Monze Day Secondary School</title>
+    <style>
+        * { box-sizing: border-box; }
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: #f5f7fb;
+            color: #1f2937;
+        }
+        .header {
+            background: #123b2c;
+            color: white;
+            padding: 18px 7%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 20px;
+        }
+        .brand h1 {
+            margin: 0;
+            font-size: 1.3rem;
+        }
+        .nav-actions {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        .logout-btn {
+            background: rgba(255,255,255,0.12);
+            color: white;
+            border: 1px solid rgba(255,255,255,0.2);
+            border-radius: 10px;
+            padding: 10px 16px;
+            cursor: pointer;
+            font-weight: 700;
+        }
+        .content {
+            max-width: 1080px;
+            margin: 32px auto;
+            padding: 0 20px 40px;
+        }
+        .hero {
+            background: linear-gradient(135deg, #ecfdf5, #ffffff);
+            border: 1px solid #dbeee5;
+            border-radius: 18px;
+            padding: 28px;
+            margin-bottom: 24px;
+        }
+        .hero h2 {
+            margin: 0 0 8px;
+            color: #123b2c;
+        }
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 20px;
+        }
+        .card {
+            background: white;
+            border-radius: 16px;
+            border: 1px solid #e5eaf2;
+            padding: 22px;
+            box-shadow: 0 8px 20px rgba(16,38,75,0.03);
+        }
+        .card h3 {
+            margin-top: 0;
+            color: #123b2c;
+        }
+        .stat {
+            font-size: 2rem;
+            font-weight: 700;
+            color: #16845b;
+            margin-bottom: 6px;
+        }
+        ul {
+            margin: 0;
+            padding-left: 18px;
+            color: #4b5563;
+        }
+        @media (max-width: 760px) {
+            .grid { grid-template-columns: 1fr; }
+            .header { flex-wrap: wrap; }
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="brand">
+            <h1>Monze Day Secondary School</h1>
+        </div>
+        <div class="nav-actions">
+            <span>Teacher Portal</span>
+            <button class="logout-btn" type="button" id="logoutButton">Logout</button>
+        </div>
+    </header>
+
+    <main class="content">
+        <section class="hero">
+            <h2>Welcome, Teacher</h2>
+            <p>Review class records, student performance, and weekly schedules from your portal.</p>
+        </section>
+
+        <section class="grid">
+            <div class="card">
+                <div class="stat">42</div>
+                <h3>Students</h3>
+                <p>Currently assigned to your class list.</p>
+            </div>
+            <div class="card">
+                <div class="stat">6</div>
+                <h3>Assignments</h3>
+                <p>Due this week for grading and feedback.</p>
+            </div>
+            <div class="card">
+                <div class="stat">89%</div>
+                <h3>Class Average</h3>
+                <p>Performance score across recent assessments.</p>
+            </div>
+        </section>
+
+        <section class="card" style="margin-top: 24px;">
+            <h3>Today's tasks</h3>
+            <ul>
+                <li>Grade English essay submissions</li>
+                <li>Update chemistry practical attendance</li>
+                <li>Prepare lesson notes for Grade 11 Biology</li>
+                <li>Submit attendance summary before 4:00 PM</li>
+            </ul>
+        </section>
+    </main>
+
+    <script>
+        const auth = JSON.parse(localStorage.getItem('monzeAuth') || 'null');
+        if (!auth || auth.role !== 'teacher') {
+            window.location.href = 'login.html';
+        }
+
+        document.getElementById('logoutButton').addEventListener('click', () => {
+            localStorage.removeItem('monzeAuth');
+            window.location.href = 'login.html';
+        });
+    </script>
+</body>
+</html>

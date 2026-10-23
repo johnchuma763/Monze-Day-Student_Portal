@@ -1,4 +1,4 @@
-// Monze Day Student Portal - Supabase Connection
+// Monze Day Student Portal
 
 const SUPABASE_URL = "YOUR_SUPABASE_PROJECT_URL";
 const SUPABASE_PUBLISHABLE_KEY = "YOUR_SUPABASE_PUBLISHABLE_KEY";
@@ -7,7 +7,7 @@ let supabaseClient = null;
 
 function initializeSupabase() {
     if (!window.supabase) {
-        console.error("Supabase library has not loaded.");
+        console.warn("Supabase library has not loaded yet.");
         return;
     }
 
@@ -27,4 +27,8 @@ function initializeSupabase() {
     console.log("Supabase connected successfully.");
 }
 
-document.addEventListener("DOMContentLoaded", initializeSupabase);
+if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", initializeSupabase);
+} else {
+    initializeSupabase();
+}

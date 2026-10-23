@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard | Monze Day Secondary School</title>
+    <style>
+        * { box-sizing: border-box; }
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: #f5f7fb;
+            color: #1f2937;
+        }
+        .header {
+            background: #10264b;
+            color: white;
+            padding: 18px 7%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 20px;
+        }
+        .brand h1 {
+            margin: 0;
+            font-size: 1.3rem;
+        }
+        .nav-actions {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        .logout-btn {
+            background: #ffffff1a;
+            color: white;
+            border: 1px solid rgba(255,255,255,0.2);
+            border-radius: 10px;
+            padding: 10px 16px;
+            cursor: pointer;
+            font-weight: 700;
+        }
+        .content {
+            max-width: 1080px;
+            margin: 32px auto;
+            padding: 0 20px 40px;
+        }
+        .hero {
+            background: linear-gradient(135deg, #edf4ff, #ffffff);
+            border: 1px solid #dfe8f3;
+            border-radius: 18px;
+            padding: 28px;
+            margin-bottom: 24px;
+        }
+        .hero h2 {
+            margin: 0 0 8px;
+            color: #10264b;
+        }
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 20px;
+        }
+        .card {
+            background: white;
+            border-radius: 16px;
+            border: 1px solid #e5eaf2;
+            padding: 22px;
+            box-shadow: 0 8px 20px rgba(16,38,75,0.03);
+        }
+        .card h3 {
+            margin-top: 0;
+            color: #10264b;
+        }
+        .stat {
+            font-size: 2rem;
+            font-weight: 700;
+            color: #1769e0;
+            margin-bottom: 6px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 10px;
+            background: white;
+            border: 1px solid #e5eaf2;
+            border-radius: 12px;
+            overflow: hidden;
+        }
+        th, td {
+            text-align: left;
+            padding: 14px 12px;
+            border-bottom: 1px solid #edf2f7;
+        }
+        th {
+            background: #f8fafc;
+            color: #10264b;
+        }
+        @media (max-width: 760px) {
+            .grid { grid-template-columns: 1fr; }
+            .header { flex-wrap: wrap; }
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="brand">
+            <h1>Monze Day Secondary School</h1>
+        </div>
+        <div class="nav-actions">
+            <span>Admin Panel</span>
+            <button class="logout-btn" type="button" id="logoutButton">Logout</button>
+        </div>
+    </header>
+
+    <main class="content">
+        <section class="hero">
+            <h2>Welcome, School Administrator</h2>
+            <p>Manage student records, teacher assignments, and school reports from this dashboard.</p>
+        </section>
+
+        <section class="grid">
+            <div class="card">
+                <div class="stat">1,240</div>
+                <h3>Students</h3>
+                <p>Active learners registered in the school system.</p>
+            </div>
+            <div class="card">
+                <div class="stat">84</div>
+                <h3>Teachers</h3>
+                <p>Full-time and part-time teaching staff.</p>
+            </div>
+            <div class="card">
+                <div class="stat">97%</div>
+                <h3>Attendance</h3>
+                <p>Average student attendance this term.</p>
+            </div>
+        </section>
+
+        <section class="card" style="margin-top: 24px;">
+            <h3>Recent school notices</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Notice</th>
+                        <th>Department</th>
+                        <th>Status</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr><td>Term 2 reports released</td><td>Academics</td><td>Published</td></tr>
+                    <tr><td>Science fair registration open</td><td>STEM</td><td>Open</td></tr>
+                    <tr><td>Board meeting schedule updated</td><td>Administration</td><td>Pending</td></tr>
+                </tbody>
+            </table>
+        </section>
+    </main>
+
+    <script>
+        const auth = JSON.parse(localStorage.getItem('monzeAuth') || 'null');
+        if (!auth || auth.role !== 'admin') {
+            window.location.href = 'login.html';
+        }
+
+        document.getElementById('logoutButton').addEventListener('click', () => {
+            localStorage.removeItem('monzeAuth');
+            window.location.href = 'login.html';
+        });
+    </script>
+</body>
+</html>

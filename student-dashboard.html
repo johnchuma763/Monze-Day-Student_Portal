@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Dashboard | Monze Day Secondary School</title>
+    <style>
+        * { box-sizing: border-box; }
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: #f5f7fb;
+            color: #1f2937;
+        }
+        .header {
+            background: #10264b;
+            color: white;
+            padding: 18px 7%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 20px;
+        }
+        .header h1 {
+            margin: 0;
+            font-size: 1.3rem;
+        }
+        .nav-actions {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        .logout-btn {
+            background: rgba(255,255,255,0.12);
+            color: white;
+            border: 1px solid rgba(255,255,255,0.2);
+            border-radius: 10px;
+            padding: 10px 16px;
+            cursor: pointer;
+            font-weight: 700;
+        }
+        .content {
+            max-width: 1080px;
+            margin: 32px auto;
+            padding: 0 20px 40px;
+        }
+        .welcome {
+            background: linear-gradient(135deg, #edf4ff, #ffffff);
+            border: 1px solid #dfe8f3;
+            border-radius: 18px;
+            padding: 28px;
+            margin-bottom: 24px;
+        }
+        .welcome h2 {
+            margin: 0 0 8px;
+            color: #10264b;
+        }
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 20px;
+        }
+        .card {
+            background: white;
+            border-radius: 16px;
+            border: 1px solid #e5eaf2;
+            padding: 22px;
+            box-shadow: 0 8px 20px rgba(16,38,75,0.03);
+        }
+        .card h3 {
+            margin-top: 0;
+            color: #10264b;
+        }
+        .stat {
+            font-size: 2rem;
+            font-weight: 700;
+            color: #1769e0;
+            margin-bottom: 6px;
+        }
+        .section {
+            margin-top: 24px;
+        }
+        .muted {
+            color: #667085;
+        }
+        .grades {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        .grades th,
+        .grades td {
+            text-align: left;
+            padding: 12px;
+            border-bottom: 1px solid #edf2f7;
+        }
+        .grades th {
+            color: #10264b;
+            background: #f8fafc;
+        }
+        @media (max-width: 760px) {
+            .grid { grid-template-columns: 1fr; }
+            .header { flex-wrap: wrap; }
+            .grades { font-size: 0.9rem; }
+            .grades th, .grades td { padding: 9px 6px; }
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <h1>Monze Day Secondary School</h1>
+        <div class="nav-actions">
+            <span>Student Portal</span>
+            <button class="logout-btn" type="button" id="logoutButton">Logout</button>
+        </div>
+    </header>
+
+    <main class="content">
+        <section class="welcome">
+            <h2 id="welcomeHeading">Welcome, Student</h2>
+            <p class="muted">Here is an overview of your learning and upcoming school activities.</p>
+        </section>
+
+        <section class="grid" aria-label="Student overview">
+            <article class="card">
+                <div class="stat">92%</div>
+                <h3>Attendance</h3>
+                <p class="muted">Attendance summary for this term.</p>
+            </article>
+            <article class="card">
+                <div class="stat">3</div>
+                <h3>Assignments</h3>
+                <p class="muted">Assignments due this week.</p>
+            </article>
+            <article class="card">
+                <div class="stat">B+</div>
+                <h3>Current average</h3>
+                <p class="muted">Average across recent assessments.</p>
+            </article>
+        </section>
+
+        <section class="card section">
+            <h3>Recent results</h3>
+            <p class="muted">Example records shown for the portal preview.</p>
+            <table class="grades">
+                <thead>
+                    <tr><th>Subject</th><th>Assessment</th><th>Score</th><th>Grade</th></tr>
+                </thead>
+                <tbody>
+                    <tr><td>Mathematics</td><td>Mid-term test</td><td>82%</td><td>A</td></tr>
+                    <tr><td>English</td><td>Essay</td><td>76%</td><td>B+</td></tr>
+                    <tr><td>Biology</td><td>Practical</td><td>88%</td><td>A</td></tr>
+                </tbody>
+            </table>
+        </section>
+
+        <section class="grid section">
+            <article class="card">
+                <h3>Upcoming assignments</h3>
+                <ul>
+                    <li>Mathematics: Algebra exercises — Friday</li>
+                    <li>English: Reading response — Monday</li>
+                    <li>Biology: Lab report — Tuesday</li>
+                </ul>
+            </article>
+            <article class="card">
+                <h3>School notices</h3>
+                <ul>
+                    <li>Science Fair registration is open.</li>
+                    <li>Mid-term reports are available from the school office.</li>
+                    <li>Extra lessons begin this week.</li>
+                </ul>
+            </article>
+            <article class="card">
+                <h3>Class schedule</h3>
+                <ul>
+                    <li>08:00 — Mathematics</li>
+                    <li>10:00 — English</li>
+                    <li>13:00 — Biology</li>
+                </ul>
+            </article>
+        </section>
+    </main>
+
+    <script>
+        let auth;
+        try {
+            auth = JSON.parse(localStorage.getItem("monzeAuth") || "null");
+        } catch (error) {
+            localStorage.removeItem("monzeAuth");
+        }
+
+        if (!auth || auth.role !== "student") {
+            window.location.replace("login.html");
+        } else if (auth.name) {
+            document.getElementById("welcomeHeading").textContent = `Welcome, ${auth.name}`;
+        }
+
+        document.getElementById("logoutButton").addEventListener("click", () => {
+            localStorage.removeItem("monzeAuth");
+            window.location.href = "login.html";
+        });
+    </script>
+</body>
+</html>
