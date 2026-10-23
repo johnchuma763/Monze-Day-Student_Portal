@@ -1,309 +1,219 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Portal Login | Monze Day Secondary School</title>
-    <style>
-        * {
-            box-sizing: border-box;
-        }
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Portal Login | Monze Day Secondary School</title>
+  <style>
+    * { box-sizing: border-box; }
 
-        body {
-            margin: 0;
-            min-height: 100vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            padding: 20px;
-            font-family: Arial, sans-serif;
-            background: linear-gradient(135deg, #edf4ff 0%, #f8fbff 100%);
-            color: #1f2937;
-        }
+    body {
+      margin: 0;
+      min-height: 100vh;
+      display: grid;
+      place-items: center;
+      padding: 20px;
+      font-family: Arial, sans-serif;
+      background: linear-gradient(135deg, #edf4ff, #f8fbff);
+      color: #1f2937;
+    }
 
-        .login-card {
-            width: 100%;
-            max-width: 440px;
-            padding: 35px 30px;
-            background: white;
-            border-radius: 18px;
-            box-shadow: 0 15px 35px rgba(17, 24, 39, 0.12);
-        }
+    .card {
+      width: 100%;
+      max-width: 440px;
+      padding: 32px 26px;
+      background: white;
+      border-radius: 18px;
+      box-shadow: 0 15px 35px #11223320;
+    }
 
-        .school-logo {
-            width: 68px;
-            height: 68px;
-            display: grid;
-            place-items: center;
-            margin: 0 auto 15px;
-            border-radius: 16px;
-            background: #123b2c;
-            color: white;
-            font-size: 26px;
-            font-weight: bold;
-        }
+    .logo {
+      width: 68px;
+      height: 68px;
+      display: grid;
+      place-items: center;
+      margin: 0 auto 15px;
+      border-radius: 16px;
+      background: #123b2c;
+      color: white;
+      font-size: 26px;
+      font-weight: bold;
+    }
 
-        h1 {
-            margin: 0 0 8px;
-            text-align: center;
-            color: #123b2c;
-            font-size: 27px;
-        }
+    h1 { text-align: center; color: #123b2c; }
 
-        .subtitle {
-            margin: 0 0 24px;
-            text-align: center;
-            color: #64748b;
-            line-height: 1.6;
-        }
+    .subtitle {
+      text-align: center;
+      color: #64748b;
+      line-height: 1.6;
+      margin-bottom: 24px;
+    }
 
-        .role-switch {
-            display: grid;
-            grid-template-columns: repeat(3, minmax(0, 1fr));
-            gap: 10px;
-            margin-bottom: 18px;
-        }
+    label {
+      display: block;
+      margin: 15px 0 7px;
+      font-weight: bold;
+    }
 
-        .role-option {
-            border: 1px solid #dbe4ee;
-            background: #f8fafc;
-            color: #334155;
-            border-radius: 10px;
-            padding: 10px 8px;
-            font-weight: 700;
-            cursor: pointer;
-            transition: all 0.2s ease;
-        }
+    input, select, button {
+      width: 100%;
+      padding: 13px;
+      border-radius: 10px;
+      font-size: 16px;
+    }
 
-        .role-option.active {
-            background: #16845b;
-            border-color: #16845b;
-            color: white;
-        }
+    input, select {
+      border: 1px solid #cbd5e1;
+      background: white;
+    }
 
-        label {
-            display: block;
-            margin: 14px 0 7px;
-            font-weight: bold;
-            color: #334155;
-        }
+    button {
+      margin-top: 22px;
+      border: 0;
+      background: #16845b;
+      color: white;
+      font-weight: bold;
+      cursor: pointer;
+    }
 
-        input,
-        select {
-            width: 100%;
-            padding: 13px 14px;
-            border: 1px solid #cbd5e1;
-            border-radius: 10px;
-            font-size: 16px;
-            background: #fff;
-            color: #0f172a;
-        }
+    button:disabled { opacity: .6; }
 
-        input:focus,
-        select:focus {
-            outline: 2px solid #16845b;
-            border-color: #16845b;
-        }
+    #message {
+      text-align: center;
+      line-height: 1.5;
+      overflow-wrap: anywhere;
+    }
 
-        button {
-            width: 100%;
-            margin-top: 24px;
-            padding: 14px;
-            border: none;
-            border-radius: 10px;
-            background: #16845b;
-            color: white;
-            font-size: 16px;
-            font-weight: bold;
-            cursor: pointer;
-        }
-
-        button:disabled {
-            opacity: 0.6;
-            cursor: wait;
-        }
-
-        #message {
-            margin-top: 16px;
-            min-height: 22px;
-            text-align: center;
-            line-height: 1.5;
-            color: #0f172a;
-        }
-
-        .back-link {
-            display: block;
-            margin-top: 22px;
-            text-align: center;
-            color: #16845b;
-            text-decoration: none;
-            font-weight: 600;
-        }
-
-        .hint {
-            margin-top: 10px;
-            font-size: 12px;
-            text-align: center;
-            color: #64748b;
-        }
-    </style>
+    .back {
+      display: block;
+      margin-top: 20px;
+      text-align: center;
+      color: #16845b;
+      text-decoration: none;
+    }
+  </style>
 </head>
-
 <body>
-    <main class="login-card">
-        <div class="school-logo">MD</div>
+  <main class="card">
+    <div class="logo">MD</div>
+    <h1>Portal Login</h1>
+    <p class="subtitle">
+      Monze Day Secondary School<br>
+      Sign in to access your account.
+    </p>
 
-        <h1>Portal Login</h1>
+    <form id="loginForm">
+      <label for="role">Login as</label>
+      <select id="role" required>
+        <option value="student">Student</option>
+        <option value="teacher">Teacher</option>
+        <option value="admin">Admin</option>
+      </select>
 
-        <p class="subtitle">
-            Monze Day Secondary School<br>
-            Sign in to access your account.
-        </p>
+      <label for="email">Email Address</label>
+      <input
+        id="email"
+        type="email"
+        autocomplete="username"
+        placeholder="Enter your registered email"
+        required
+      >
 
-        <div class="role-switch" aria-label="Choose user role">
-            <button type="button" class="role-option active" data-role="student">Student</button>
-            <button type="button" class="role-option" data-role="teacher">Teacher</button>
-            <button type="button" class="role-option" data-role="admin">Admin</button>
-        </div>
+      <label for="password">Password</label>
+      <input
+        id="password"
+        type="password"
+        autocomplete="current-password"
+        placeholder="Enter your password"
+        required
+      >
 
-        <form id="loginForm">
-            <label for="role">Login as</label>
-            <select id="role" aria-label="Select your role">
-                <option value="student">Student</option>
-                <option value="teacher">Teacher</option>
-                <option value="admin">Admin</option>
-            </select>
+      <button id="loginButton" type="submit">Sign In</button>
+      <p id="message" role="status" aria-live="polite"></p>
+    </form>
 
-            <label for="email">Email Address</label>
-            <input
-                type="email"
-                id="email"
-                autocomplete="username"
-                placeholder="name@monze-school.edu"
-                required
-            >
+    <a class="back" href="index.html">← Back to Homepage</a>
+  </main>
 
-            <label for="password">Password</label>
-            <input
-                type="password"
-                id="password"
-                autocomplete="current-password"
-                placeholder="Enter your password"
-                required
-            >
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script>
+    // Supabase project settings
+    const SUPABASE_URL =
+      "https://rlgdmvgkzckvjzgcduyg.supabase.co";
 
-            <button type="submit" id="loginButton">Sign In</button>
+    const SUPABASE_PUBLISHABLE_KEY =
+      "sb_publishable_h4jpZGxZ7EwwSxM6sq9K8A_2Cx7K1IG";
 
-            <p id="message" role="status" aria-live="polite"></p>
-        </form>
+    const client = window.supabase.createClient(
+      SUPABASE_URL,
+      SUPABASE_PUBLISHABLE_KEY
+    );
 
-        <p class="hint">Demo credentials: admin@monze-school.edu / admin123, teacher@monze-school.edu / teacher123, student@monze-school.edu / student123</p>
+    const form = document.getElementById("loginForm");
+    const button = document.getElementById("loginButton");
+    const message = document.getElementById("message");
 
-        <a class="back-link" href="index.html">← Back to Homepage</a>
-    </main>
+    form.addEventListener("submit", async (event) => {
+      event.preventDefault();
 
-    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+      button.disabled = true;
+      button.textContent = "Signing in...";
+      message.textContent = "";
 
-    <script>
-        const SUPABASE_URL = "https://your-project-id.supabase.co";
-        const SUPABASE_PUBLISHABLE_KEY = "sb_publishable_your_key_here";
+      const role = document.getElementById("role").value;
+      const email = document.getElementById("email").value.trim();
+      const password = document.getElementById("password").value;
 
-        const message = document.getElementById("message");
-        const loginButton = document.getElementById("loginButton");
-        const roleSelect = document.getElementById("role");
-        const roleButtons = document.querySelectorAll(".role-option");
+      try {
+        // Authenticate against Supabase Auth.
+        const { data, error } = await client.auth.signInWithPassword({
+          email,
+          password
+        });
 
-        const credentials = {
-            student: {
-                email: "student@monze-school.edu",
-                password: "student123"
-            },
-            teacher: {
-                email: "teacher@monze-school.edu",
-                password: "teacher123"
-            },
-            admin: {
-                email: "admin@monze-school.edu",
-                password: "admin123"
-            }
+        if (error) throw error;
+        if (!data.user) throw new Error("User account was not returned.");
+
+        // Retrieve the role assigned to this authenticated user.
+        const { data: roleRecord, error: roleError } = await client
+          .from("user_roles")
+          .select("role")
+          .eq("id", data.user.id)
+          .maybeSingle();
+
+        if (roleError) throw roleError;
+
+        if (!roleRecord) {
+          await client.auth.signOut();
+          throw new Error(
+            "No portal role is assigned to this account. Contact the administrator."
+          );
+        }
+
+        if (roleRecord.role !== role) {
+          await client.auth.signOut();
+          throw new Error(
+            "The selected role does not match your assigned account role."
+          );
+        }
+
+        const pages = {
+          admin: "admin-dashboard.html",
+          teacher: "teacher-dashboard.html",
+          student: "student-dashboard.html"
         };
 
-        function updateSelectedRole(role) {
-            roleSelect.value = role;
-            roleButtons.forEach((button) => {
-                button.classList.toggle("active", button.dataset.role === role);
-            });
-        }
+        message.textContent = "Sign-in successful. Opening your dashboard...";
 
-        roleButtons.forEach((button) => {
-            button.addEventListener("click", () => updateSelectedRole(button.dataset.role));
-        });
-
-        roleSelect.addEventListener("change", (event) => {
-            updateSelectedRole(event.target.value);
-        });
-
-        const configured =
-            SUPABASE_URL.startsWith("https://") &&
-            SUPABASE_PUBLISHABLE_KEY.startsWith("sb_publishable_");
-
-        const client = configured
-            ? window.supabase.createClient(SUPABASE_URL, SUPABASE_PUBLISHABLE_KEY)
-            : null;
-
-        document.getElementById("loginForm").addEventListener("submit", async function (event) {
-            event.preventDefault();
-
-            const role = roleSelect.value;
-            const email = document.getElementById("email").value.trim();
-            const password = document.getElementById("password").value;
-
-            loginButton.disabled = true;
-            loginButton.textContent = "Signing in...";
-            message.textContent = "";
-
-            const account = credentials[role];
-            const validLocalAccount = account && account.email.toLowerCase() === email.toLowerCase() && account.password === password;
-
-            if (validLocalAccount) {
-                localStorage.setItem(
-                    "monzeAuth",
-                    JSON.stringify({ role, email, name: role === "admin" ? "School Administrator" : role === "teacher" ? "Teacher" : "Student" })
-                );
-
-                const targetPage = role === "admin"
-                    ? "admin-dashboard.html"
-                    : role === "teacher"
-                        ? "teacher-dashboard.html"
-                        : "student-dashboard.html";
-                message.textContent = "Login successful. Redirecting...";
-
-                setTimeout(() => {
-                    window.location.href = targetPage;
-                }, 600);
-                return;
-            }
-
-            if (client) {
-                try {
-                    const { data, error } = await client.auth.signInWithPassword({ email, password });
-                    if (error) {
-                        throw error;
-                    }
-                    if (data.session) {
-                        message.textContent = "Login successful! Your account is signed in.";
-                        return;
-                    }
-                } catch (error) {
-                    message.textContent = "Unable to sign in. Please check your email and password.";
-                }
-            } else {
-                message.textContent = "Invalid email or password for the selected role.";
-            }
-
-            loginButton.disabled = false;
-            loginButton.textContent = "Sign In";
-        });
-    </script>
+        window.location.replace(pages[role]);
+      } catch (error) {
+        console.error("Portal sign-in error:", error);
+        message.textContent =
+          error.message || "Unable to sign in. Please try again.";
+        button.disabled = false;
+        button.textContent = "Sign In";
+      }
+    });
+  </script>
 </body>
-</html>
+    </html>
