@@ -1,57 +1,46 @@
-<svg width="960" height="960" viewBox="0 0 960 960" fill="none" xmlns="http://www.w3.org/2000/svg">
+<svg width="900" height="900" viewBox="0 0 900 900" fill="none" xmlns="http://www.w3.org/2000/svg">
   <defs>
-    <linearGradient id="blueGrad" x1="140" y1="120" x2="770" y2="780" gradientUnits="userSpaceOnUse">
-      <stop stop-color="#0E3F8F"/>
-      <stop offset="1" stop-color="#0A2D68"/>
+    <linearGradient id="shieldBlue" x1="180" y1="80" x2="720" y2="760" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#0E469F"/>
+      <stop offset="1" stop-color="#0A2F6D"/>
     </linearGradient>
-    <linearGradient id="goldGrad" x1="250" y1="130" x2="700" y2="720" gradientUnits="userSpaceOnUse">
-      <stop stop-color="#F8D96A"/>
-      <stop offset="1" stop-color="#D7A829"/>
+    <linearGradient id="gold" x1="330" y1="120" x2="630" y2="720" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#F7D66F"/>
+      <stop offset="1" stop-color="#D6A42F"/>
     </linearGradient>
-    <filter id="shadow" x="-20%" y="-20%" width="140%" height="160%">
-      <feDropShadow dx="0" dy="10" stdDeviation="12" flood-color="#0A234B" flood-opacity="0.18"/>
+    <filter id="softShadow" x="-20%" y="-20%" width="140%" height="160%">
+      <feDropShadow dx="0" dy="12" stdDeviation="12" flood-color="#0A244F" flood-opacity="0.18"/>
     </filter>
   </defs>
 
-  <g filter="url(#shadow)">
-    <path d="M87 155C87 129.595 107.595 109 133 109H827C852.405 109 873 129.595 873 155V164C873 190.451 852.451 211 826 211H133C107.595 211 87 190.405 87 164V155Z" fill="#0D3E8E"/>
-    <path d="M87 155C87 129.595 107.595 109 133 109H827C852.405 109 873 129.595 873 155V164C873 190.451 852.451 211 826 211H133C107.595 211 87 190.405 87 164V155Z" stroke="#E5BE35" stroke-width="10"/>
-    <path d="M87 155C87 129.595 107.595 109 133 109H827C852.405 109 873 129.595 873 155V164C873 190.451 852.451 211 826 211H133C107.595 211 87 190.405 87 164V155Z" opacity="0.2" fill="white"/>
-    <text x="480" y="171" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="58" font-weight="800" fill="#F5F8FF" letter-spacing="3">MONZE DAY SECONDARY SCHOOL</text>
-  </g>
+  <g filter="url(#softShadow)">
+    <path d="M450 52C570 52 668 95 735 122V290C735 428 650 560 450 732C250 560 165 428 165 290V122C232 95 330 52 450 52Z" fill="url(#shieldBlue)" stroke="url(#gold)" stroke-width="16"/>
 
-  <g filter="url(#shadow)">
-    <path d="M480 230C650 230 760 289 760 452C760 650 632 744 480 796C328 744 200 650 200 452C200 289 310 230 480 230Z" fill="#F5F7FB" stroke="#0E3F8F" stroke-width="18"/>
-    <path d="M480 260C625 260 718 314 718 452C718 620 608 700 480 748C352 700 242 620 242 452C242 314 335 260 480 260Z" fill="#F9FBFF" stroke="#E2B939" stroke-width="9"/>
-  </g>
+    <path d="M242 186H658C653 220 638 248 616 270H284C262 248 247 220 242 186Z" fill="#F5F8FF" opacity="0.12"/>
 
-  <g>
-    <path d="M343 330H455C469.359 330 481 341.641 481 356V500H317V356C317 341.641 328.641 330 343 330Z" fill="url(#blueGrad)"/>
-    <path d="M302 356L410 274H550L642 356V501H302V356Z" fill="url(#blueGrad)"/>
-    <path d="M410 288H546L598 355H456L410 288Z" fill="#F4F8FF"/>
-    <path d="M342 398H467L518 467H350L342 398Z" fill="#F4F8FF"/>
-    <path d="M323 373C361 349 394 337 422 337C450 337 484 349 522 373L581 430L518 430H463L410 385L356 430H313L323 373Z" fill="#F4F8FF"/>
-    <path d="M394 331L479 331L446 394H424L394 331Z" fill="#D7AE2B"/>
-    <path d="M268 463L362 456L320 477L232 487L268 463Z" fill="#D7AE2B"/>
-    <path d="M691 463L597 456L639 477L727 487L691 463Z" fill="#D7AE2B"/>
-  </g>
+    <path d="M220 176H680V214C680 226 670 236 658 236H242C230 236 220 226 220 214V176Z" fill="#0A245D"/>
+    <text x="450" y="215" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="34" font-weight="800" letter-spacing="3" fill="#F4F8FF">MONZE DAY</text>
 
-  <g>
-    <path d="M280 504H680C701.539 504 719 521.461 719 543V546C719 567.539 701.539 585 680 585H280C258.461 585 241 567.539 241 546V543C241 521.461 258.461 504 280 504Z" fill="#0D3E8E"/>
-    <path d="M322 546H638C653.464 546 666 558.536 666 574V577C666 592.464 653.464 605 638 605H322C306.536 605 294 592.464 294 577V574C294 558.536 306.536 546 322 546Z" fill="#F7FAFF"/>
-    <path d="M304 540H656L631 571H329L304 540Z" fill="#E4B72C"/>
-  </g>
+    <path d="M280 590H620C631 590 640 599 640 610C640 621 631 630 620 630H280C269 630 260 621 260 610C260 599 269 590 280 590Z" fill="#F2C94C"/>
 
-  <g>
-    <path d="M314 604H646C675.823 604 700 628.177 700 658V666C700 696.823 675.823 721 646 721H314C284.177 721 260 696.823 260 666V658C260 628.177 284.177 604 314 604Z" fill="#0D3E8E"/>
-    <path d="M334 630C393 662 431 678 480 678C529 678 567 662 626 630" stroke="#F4C955" stroke-width="10" stroke-linecap="round" stroke-linejoin="round"/>
-    <path d="M352 640H608C622.359 640 634 651.641 634 666V671C634 685.359 622.359 697 608 697H352C337.641 697 326 685.359 326 671V666C326 651.641 337.641 640 352 640Z" fill="#F4F7FF"/>
-    <path d="M364 675H596" stroke="#0D3E8E" stroke-width="10" stroke-linecap="round"/>
-  </g>
+    <path d="M310 654H590C607 654 621 668 621 685V696C621 713 607 727 590 727H310C293 727 279 713 279 696V685C279 668 293 654 310 654Z" fill="#0A245D"/>
+    <text x="450" y="706" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="28" font-weight="800" letter-spacing="4" fill="#F4F8FF">SECONDARY SCHOOL</text>
 
-  <g>
-    <path d="M182 740C182 710.177 206.177 686 236 686H724C753.823 686 778 710.177 778 740V765H182V740Z" fill="#0D3E8E"/>
-    <path d="M182 740C182 710.177 206.177 686 236 686H724C753.823 686 778 710.177 778 740V765H182V740Z" stroke="#E0B12F" stroke-width="10"/>
-    <text x="480" y="747" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="44" font-weight="800" fill="#F5F8FF" letter-spacing="2">EDUCATION IS AN EQUALIZER</text>
+    <g>
+      <path d="M330 257C343 235 372 219 405 219H495C528 219 557 235 570 257L610 318H290L330 257Z" fill="#F8FBFF"/>
+      <path d="M450 256L419 329H481L450 256Z" fill="url(#gold)"/>
+      <path d="M320 325H580V420C580 486 527 540 450 578C373 540 320 486 320 420V325Z" fill="#F7FAFF"/>
+      <path d="M382 366C318 375 285 403 285 445C285 482 315 514 358 535C399 555 427 570 450 594C473 570 501 555 542 535C585 514 615 482 615 445C615 403 582 375 518 366V420C518 448 501 470 450 491C399 470 382 448 382 420V366Z" fill="#0E469F"/>
+      <path d="M364 412C388 396 412 389 450 389C488 389 512 396 536 412V465C536 489 501 507 450 525C399 507 364 489 364 465V412Z" fill="#F7FAFF"/>
+      <path d="M370 332H530V366H370V332Z" fill="#F2C94C"/>
+      <path d="M390 420V517" stroke="#F2C94C" stroke-width="10" stroke-linecap="round"/>
+      <path d="M510 420V517" stroke="#F2C94C" stroke-width="10" stroke-linecap="round"/>
+      <path d="M450 389V544" stroke="#F2C94C" stroke-width="10" stroke-linecap="round"/>
+    </g>
+
+    <g>
+      <path d="M358 166H542C573 166 598 191 598 222V242H302V222C302 191 327 166 358 166Z" fill="#E8B93B"/>
+      <text x="450" y="214" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="18" font-weight="800" letter-spacing="3" fill="#102B50">MD</text>
+    </g>
   </g>
 </svg>
