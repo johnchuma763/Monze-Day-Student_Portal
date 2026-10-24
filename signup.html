@@ -1,0 +1,540 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#1769e8">
+  <title>Create Account | Monze Day Secondary School</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    :root {
+      --blue: #1769e8;
+      --navy: #102b50;
+      --light-blue: #edf5ff;
+      --text: #172b4d;
+      --muted: #718096;
+      --border: #dce6f5;
+      --success: #16845b;
+      --error: #b42318;
+    }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      font-family: Arial, Helvetica, sans-serif;
+      color: var(--text);
+      background: linear-gradient(145deg, #f7faff, #eaf3ff);
+    }
+
+    .top-line {
+      height: 6px;
+      background: var(--blue);
+    }
+
+    header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 14px;
+      padding: 20px 6%;
+      background: #fff;
+      border-bottom: 1px solid #e7edf6;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+
+    .logo {
+      width: 66px;
+      height: 66px;
+      display: grid;
+      place-items: center;
+      flex-shrink: 0;
+      border-radius: 18px;
+      background: var(--blue);
+      color: white;
+      font-size: 25px;
+      font-weight: 800;
+    }
+
+    .brand h2 {
+      margin: 0;
+      color: var(--navy);
+      font-size: clamp(16px, 3vw, 23px);
+    }
+
+    .brand p {
+      margin: 6px 0 0;
+      color: var(--muted);
+      font-size: 11px;
+      letter-spacing: 3px;
+    }
+
+    .home-link {
+      color: var(--blue);
+      font-size: 14px;
+      font-weight: 700;
+      text-decoration: none;
+      white-space: nowrap;
+    }
+
+    main {
+      width: 100%;
+      max-width: 760px;
+      margin: 0 auto;
+      padding: 35px 18px 45px;
+    }
+
+    .intro {
+      margin-bottom: 26px;
+    }
+
+    .badge {
+      display: inline-block;
+      padding: 10px 17px;
+      border-radius: 30px;
+      background: #dcecff;
+      color: var(--blue);
+      font-size: 12px;
+      font-weight: 800;
+      letter-spacing: 1.5px;
+    }
+
+    .intro h1 {
+      margin: 22px 0 12px;
+      color: var(--navy);
+      font-size: clamp(30px, 6vw, 43px);
+      line-height: 1.15;
+      letter-spacing: -1px;
+    }
+
+    .intro p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 16px;
+      line-height: 1.7;
+    }
+
+    .card {
+      padding: 28px;
+      border: 1px solid #ffffff;
+      border-radius: 22px;
+      background: #fff;
+      box-shadow: 0 18px 50px #183c6810;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 18px;
+    }
+
+    label {
+      display: block;
+      margin: 20px 0 9px;
+      font-size: 14px;
+      font-weight: 700;
+    }
+
+    input {
+      width: 100%;
+      min-height: 52px;
+      padding: 14px;
+      border: 1px solid var(--border);
+      border-radius: 11px;
+      outline: none;
+      background: #fbfdff;
+      color: var(--text);
+      font: inherit;
+      font-size: 15px;
+    }
+
+    input:focus {
+      border-color: var(--blue);
+      box-shadow: 0 0 0 3px #1769e81b;
+    }
+
+    .password-wrap {
+      position: relative;
+    }
+
+    .password-wrap input {
+      padding-right: 80px;
+    }
+
+    .show-password {
+      position: absolute;
+      top: 50%;
+      right: 12px;
+      transform: translateY(-50%);
+      padding: 8px 4px;
+      border: 0;
+      background: transparent;
+      color: var(--blue);
+      font-weight: 700;
+      cursor: pointer;
+    }
+
+    .submit-btn {
+      width: 100%;
+      min-height: 54px;
+      margin-top: 27px;
+      padding: 15px;
+      border: 0;
+      border-radius: 12px;
+      background: var(--blue);
+      color: #fff;
+      font-size: 16px;
+      font-weight: 700;
+      cursor: pointer;
+      transition: background .2s;
+    }
+
+    .submit-btn:hover {
+      background: #1057c5;
+    }
+
+    .submit-btn:disabled {
+      opacity: 0.65;
+      cursor: wait;
+    }
+
+    .signin-link {
+      margin-top: 18px;
+      color: var(--muted);
+      font-size: 14px;
+      text-align: center;
+    }
+
+    .signin-link a {
+      color: var(--blue);
+      font-weight: 700;
+      text-decoration: none;
+    }
+
+    .message {
+      margin: 15px 0 0;
+      font-size: 13px;
+      line-height: 1.6;
+      overflow-wrap: anywhere;
+    }
+
+    .message.error {
+      color: var(--error);
+    }
+
+    .message.success {
+      color: var(--success);
+    }
+
+    .info-note {
+      margin-top: 18px;
+      padding: 12px 14px;
+      border-radius: 12px;
+      background: var(--light-blue);
+      color: #58739b;
+      font-size: 12px;
+      line-height: 1.6;
+    }
+
+    .back {
+      display: block;
+      margin-top: 24px;
+      padding-top: 21px;
+      border-top: 1px solid #e7edf6;
+      color: var(--blue);
+      text-align: center;
+      font-size: 14px;
+      font-weight: 700;
+      text-decoration: none;
+    }
+
+    footer {
+      padding: 23px 15px;
+      background: #fff;
+      border-top: 1px solid #e4ebf5;
+      color: var(--muted);
+      font-size: 12px;
+      text-align: center;
+    }
+
+    @media (max-width: 540px) {
+      header {
+        padding: 16px;
+      }
+
+      .logo {
+        width: 52px;
+        height: 52px;
+        border-radius: 14px;
+        font-size: 21px;
+      }
+
+      .brand {
+        gap: 10px;
+      }
+
+      .brand p {
+        font-size: 9px;
+        letter-spacing: 2px;
+      }
+
+      .home-link {
+        font-size: 12px;
+      }
+
+      main {
+        padding: 28px 14px 35px;
+      }
+
+      .card {
+        padding: 22px 18px;
+        border-radius: 18px;
+      }
+
+      .grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="top-line"></div>
+
+  <header>
+    <div class="brand">
+      <div class="logo">MD</div>
+      <div>
+        <h2>Monze Day Secondary School</h2>
+        <p>STUDENT PORTAL</p>
+      </div>
+    </div>
+
+    <a class="home-link" href="index.html">← Home</a>
+  </header>
+
+  <main>
+    <section class="intro">
+      <span class="badge">CREATE ACCOUNT</span>
+      <h1>Register as a new student</h1>
+      <p>
+        Sign up for portal access. Your account will be reviewed by the school administrator
+        before the student profile is linked to your account.
+      </p>
+    </section>
+
+    <section class="card">
+      <form id="signupForm" novalidate>
+        <div class="grid">
+          <div>
+            <label for="fullName">Full name</label>
+            <input id="fullName" name="fullName" type="text" placeholder="Enter your full name" required>
+          </div>
+
+          <div>
+            <label for="studentNumber">Student number</label>
+            <input id="studentNumber" name="studentNumber" type="text" placeholder="Enter your student number" required>
+          </div>
+
+          <div>
+            <label for="className">Class</label>
+            <input id="className" name="className" type="text" placeholder="e.g. Grade 10A" required>
+          </div>
+
+          <div>
+            <label for="email">Email address</label>
+            <input id="email" name="email" type="email" placeholder="Enter your email address" required>
+          </div>
+        </div>
+
+        <div class="grid">
+          <div class="password-wrap">
+            <label for="password">Password</label>
+            <input id="password" name="password" type="password" placeholder="Enter a strong password" required>
+            <button type="button" class="show-password" id="togglePassword">Show</button>
+          </div>
+
+          <div class="password-wrap">
+            <label for="confirmPassword">Confirm password</label>
+            <input id="confirmPassword" name="confirmPassword" type="password" placeholder="Confirm your password" required>
+            <button type="button" class="show-password" id="toggleConfirmPassword">Show</button>
+          </div>
+        </div>
+
+        <button type="submit" class="submit-btn" id="signupButton">
+          <span id="buttonText">Create Account</span>
+        </button>
+
+        <p id="message" class="message" role="status" aria-live="polite"></p>
+
+        <div class="info-note">
+          Important: Your student number is not automatically linked to a student record.
+          The school administrator must verify your details and link your account to the
+          correct student profile before access is granted.
+        </div>
+
+        <p class="signin-link">
+          Already have an account? <a href="login.html">Sign In</a>
+        </p>
+      </form>
+    </section>
+  </main>
+
+  <footer>
+    © Monze Day Secondary School · Student Portal
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+  <script>
+    const SUPABASE_URL = "https://rlgdmvgkzckvjzgcduyg.supabase.co";
+    const SUPABASE_PUBLISHABLE_KEY = "sb_publishable_h4jpZGxZ7EwwSxM6sq9K8A_2Cx7K1IG";
+
+    const client = window.supabase.createClient(
+      SUPABASE_URL,
+      SUPABASE_PUBLISHABLE_KEY
+    );
+
+    const signupForm = document.getElementById("signupForm");
+    const signupButton = document.getElementById("signupButton");
+    const buttonText = document.getElementById("buttonText");
+    const message = document.getElementById("message");
+    const passwordInput = document.getElementById("password");
+    const confirmPasswordInput = document.getElementById("confirmPassword");
+
+    const setMessage = (text, type) => {
+      message.textContent = text;
+      message.className = "message " + type;
+    };
+
+    function togglePasswordVisibility(buttonId, inputId) {
+      const passwordField = document.getElementById(inputId);
+      const toggleButton = document.getElementById(buttonId);
+
+      toggleButton.addEventListener("click", function () {
+        const showing = passwordField.type === "password";
+        passwordField.type = showing ? "text" : "password";
+        toggleButton.textContent = showing ? "Hide" : "Show";
+      });
+    }
+
+    togglePasswordVisibility("togglePassword", "password");
+    togglePasswordVisibility("toggleConfirmPassword", "confirmPassword");
+
+    signupForm.addEventListener("submit", async function (event) {
+      event.preventDefault();
+
+      const fullName = document.getElementById("fullName").value.trim();
+      const studentNumber = document.getElementById("studentNumber").value.trim();
+      const className = document.getElementById("className").value.trim();
+      const email = document.getElementById("email").value.trim();
+      const password = passwordInput.value;
+      const confirmPassword = confirmPasswordInput.value;
+
+      if (!fullName || !studentNumber || !className || !email || !password || !confirmPassword) {
+        setMessage("Please complete all fields before creating your account.", "error");
+        return;
+      }
+
+      if (password.length < 8) {
+        setMessage("Your password must be at least 8 characters long.", "error");
+        return;
+      }
+
+      if (password !== confirmPassword) {
+        setMessage("Passwords do not match.", "error");
+        return;
+      }
+
+      const emailPattern = /^[^\s@]+@[^\s@]+$/;
+      if (!emailPattern.test(email)) {
+        setMessage("Please enter a valid email address.", "error");
+        return;
+      }
+
+      signupButton.disabled = true;
+      buttonText.textContent = "Creating account...";
+      setMessage("", "");
+
+      try {
+        const { data, error } = await client.auth.signUp({
+          email,
+          password,
+          options: {
+            emailRedirectTo: window.location.origin + "/login.html"
+          }
+        });
+
+        if (error) throw error;
+
+        if (!data.user) {
+          throw new Error("We could not create the account. Please try again.");
+        }
+
+        const accountId = data.user.id;
+
+        const { data: profileData, error: profileError } = await client
+          .from("user_roles")
+          .select("role")
+          .eq("id", accountId)
+          .maybeSingle();
+
+        if (profileError) {
+          throw profileError;
+        }
+
+        if (profileData && profileData.role && ["admin", "teacher"].includes(profileData.role)) {
+          await client.auth.signOut();
+          throw new Error("Admin or teacher roles are not allowed for student registration.");
+        }
+
+        const { error: updateError } = await client
+          .from("user_roles")
+          .insert({
+            id: accountId,
+            role: "student",
+            full_name: fullName,
+            student_number: studentNumber,
+            class_name: className,
+            email: email
+          });
+
+        if (updateError) {
+          throw updateError;
+        }
+
+        setMessage(
+          "Registration submitted successfully. Your details are awaiting administrator verification. " +
+          "The school administrator must verify your information and link your account to the correct student profile before access is granted.",
+          "success"
+        );
+
+        signupForm.reset();
+        signupButton.disabled = false;
+        buttonText.textContent = "Create Account";
+
+      } catch (error) {
+        console.error("Student registration error:", error);
+
+        let messageText = "Unable to create your account. Please try again.";
+
+        if (error && error.message) {
+          messageText = error.message;
+        }
+
+        setMessage(messageText, "error");
+        signupButton.disabled = false;
+        buttonText.textContent = "Create Account";
+      }
+    });
+  </script>
+</body>
+</html>
