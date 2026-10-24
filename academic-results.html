@@ -1,0 +1,967 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#1769e8" />
+  <title>Academic Results | Monze Day Secondary School</title>
+  <style>
+    :root {
+      --blue: #1769e8;
+      --navy: #102b50;
+      --bg: #edf4ff;
+      --panel: #ffffff;
+      --soft: #f7faff;
+      --text: #172b4d;
+      --muted: #6b7a90;
+      --border: #dfe9f5;
+      --success: #16845b;
+      --warning: #b7791f;
+      --danger: #c0392b;
+      --shadow: rgba(16, 43, 80, 0.08);
+    }
+
+    * { box-sizing: border-box; }
+
+    html, body {
+      margin: 0;
+      min-height: 100%;
+      font-family: Arial, Helvetica, sans-serif;
+      background: linear-gradient(145deg, #f6faff, #ebf4ff);
+      color: var(--text);
+    }
+
+    a { color: inherit; }
+
+    body {
+      min-height: 100vh;
+    }
+
+    .top-bar {
+      height: 6px;
+      background: var(--blue);
+    }
+
+    .header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      padding: 18px clamp(16px, 4vw, 38px);
+      background: #fff;
+      border-bottom: 1px solid #e5edf7;
+      position: sticky;
+      top: 0;
+      z-index: 10;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .brand-mark {
+      width: 56px;
+      height: 56px;
+      border-radius: 16px;
+      background: var(--blue);
+      color: #fff;
+      display: grid;
+      place-items: center;
+      font-weight: 800;
+      font-size: 22px;
+      flex-shrink: 0;
+    }
+
+    .brand-text h1 {
+      margin: 0;
+      font-size: clamp(18px, 2vw, 23px);
+      color: var(--navy);
+    }
+
+    .brand-text p {
+      margin: 4px 0 0;
+      font-size: 11px;
+      letter-spacing: 2.5px;
+      color: var(--muted);
+    }
+
+    .header-actions {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+    }
+
+    .header-link,
+    .action-btn,
+    .primary-btn,
+    .secondary-btn,
+    .danger-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 42px;
+      padding: 10px 16px;
+      border-radius: 10px;
+      text-decoration: none;
+      border: 1px solid transparent;
+      font-weight: 700;
+      font-size: 14px;
+      cursor: pointer;
+      transition: transform 0.15s ease, opacity 0.15s ease;
+    }
+
+    .header-link,
+    .secondary-btn {
+      background: #f5f9ff;
+      color: var(--blue);
+      border-color: #dfeaff;
+    }
+
+    .primary-btn {
+      background: var(--blue);
+      color: white;
+      border-color: var(--blue);
+    }
+
+    .danger-btn {
+      background: var(--danger);
+      color: white;
+      border-color: var(--danger);
+    }
+
+    .action-btn:disabled,
+    .primary-btn:disabled,
+    .secondary-btn:disabled,
+    .danger-btn:disabled {
+      opacity: 0.65;
+      cursor: wait;
+    }
+
+    .header-link:hover,
+    .action-btn:hover,
+    .primary-btn:hover,
+    .secondary-btn:hover,
+    .danger-btn:hover {
+      transform: translateY(-1px);
+    }
+
+    main {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 26px 18px 44px;
+    }
+
+    .page-shell {
+      display: grid;
+      gap: 22px;
+    }
+
+    .hero {
+      background: linear-gradient(135deg, #edf5ff, #ffffff);
+      border: 1px solid var(--border);
+      border-radius: 22px;
+      padding: clamp(22px, 4vw, 30px);
+      box-shadow: 0 14px 40px var(--shadow);
+    }
+
+    .badge {
+      display: inline-block;
+      padding: 8px 14px;
+      border-radius: 999px;
+      background: #dfeeff;
+      color: var(--blue);
+      font-size: 12px;
+      letter-spacing: 1.2px;
+      font-weight: 800;
+      text-transform: uppercase;
+    }
+
+    .hero h2 {
+      margin: 18px 0 10px;
+      color: var(--navy);
+      font-size: clamp(30px, 5vw, 44px);
+      line-height: 1.1;
+      letter-spacing: -0.03em;
+    }
+
+    .hero p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 16px;
+      line-height: 1.7;
+    }
+
+    .card {
+      background: var(--panel);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      box-shadow: 0 12px 30px rgba(23, 58, 112, 0.04);
+      overflow: hidden;
+    }
+
+    .card-header {
+      padding: 20px 20px 0;
+    }
+
+    .card-header h3 {
+      margin: 0;
+      color: var(--navy);
+      font-size: clamp(20px, 3vw, 24px);
+    }
+
+    .card-body {
+      padding: 20px;
+    }
+
+    .form-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 18px;
+    }
+
+    .field {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .field.full {
+      grid-column: 1 / -1;
+    }
+
+    label {
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--text);
+    }
+
+    input, select {
+      width: 100%;
+      min-height: 52px;
+      border: 1px solid #d1dce8;
+      background: #fbfdff;
+      color: var(--text);
+      border-radius: 12px;
+      font: inherit;
+      font-size: 15px;
+      padding: 13px 14px;
+      outline: none;
+      transition: border-color 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    input:focus, select:focus {
+      border-color: var(--blue);
+      box-shadow: 0 0 0 3px rgba(23, 105, 232, 0.12);
+    }
+
+    .form-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 20px;
+    }
+
+    .message {
+      margin-top: 16px;
+      font-size: 14px;
+      line-height: 1.6;
+      min-height: 20px;
+      overflow-wrap: anywhere;
+    }
+
+    .message.error { color: var(--danger); }
+    .message.success { color: var(--success); }
+    .message.info { color: var(--muted); }
+
+    .table-wrap {
+      overflow-x: auto;
+      margin-top: 16px;
+      border: 1px solid var(--border);
+      border-radius: 14px;
+    }
+
+    table {
+      width: 100%;
+      min-width: 820px;
+      border-collapse: collapse;
+      background: white;
+    }
+
+    th, td {
+      padding: 12px 14px;
+      border-bottom: 1px solid var(--border);
+      text-align: left;
+      vertical-align: top;
+      font-size: 14px;
+    }
+
+    th {
+      background: #f8fbff;
+      color: var(--navy);
+      font-size: 12px;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+    }
+
+    tbody tr:nth-child(even) {
+      background: #fbfdff;
+    }
+
+    .result-actions {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    .compact-btn {
+      min-height: 36px;
+      padding: 8px 10px;
+      border-radius: 8px;
+      border: 1px solid transparent;
+      font-size: 13px;
+      font-weight: 700;
+      cursor: pointer;
+    }
+
+    .compact-btn.edit {
+      background: #eaf3ff;
+      border-color: #dfeaff;
+      color: var(--blue);
+    }
+
+    .compact-btn.delete {
+      background: #fdeeee;
+      border-color: #f3d4d4;
+      color: var(--danger);
+    }
+
+    .hidden {
+      display: none !important;
+    }
+
+    .empty-state {
+      padding: 24px;
+      color: var(--muted);
+      text-align: center;
+      font-size: 15px;
+    }
+
+    .sr-only {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      padding: 0;
+      margin: -1px;
+      overflow: hidden;
+      clip: rect(0, 0, 0, 0);
+      white-space: nowrap;
+      border: 0;
+    }
+
+    @media (max-width: 760px) {
+      .header {
+        align-items: flex-start;
+        flex-wrap: wrap;
+      }
+
+      .form-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .header-actions {
+        width: 100%;
+        justify-content: flex-start;
+      }
+
+      .hero {
+        padding: 20px 18px;
+      }
+
+      .card-header,
+      .card-body {
+        padding-left: 16px;
+        padding-right: 16px;
+      }
+
+      th, td {
+        padding: 10px 8px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="top-bar"></div>
+
+  <header class="header">
+    <div class="brand" aria-label="Monze Day Secondary School brand">
+      <div class="brand-mark">MD</div>
+      <div class="brand-text">
+        <h1>Monze Day Secondary School</h1>
+        <p>STUDENT PORTAL</p>
+      </div>
+    </div>
+
+    <div class="header-actions">
+      <a class="header-link" href="index.html">← Home</a>
+      <button class="action-btn primary-btn" id="logoutButton" type="button">Logout</button>
+    </div>
+  </header>
+
+  <main>
+    <div id="loadingMessage" class="message info" aria-live="polite">Checking your account and portal access...</div>
+
+    <div id="app" class="page-shell hidden">
+      <section class="hero">
+        <span class="badge" id="pageBadge">Portal Access</span>
+        <h2 id="pageTitle">Academic Results</h2>
+        <p id="pageDescription">View and manage academic performance records for the school.</p>
+      </section>
+
+      <section id="staffSection" class="card hidden">
+        <div class="card-header">
+          <h3 id="formHeading">Add Academic Result</h3>
+        </div>
+        <div class="card-body">
+          <form id="resultForm">
+            <div class="form-grid">
+              <div class="field">
+                <label for="studentSelect">Student</label>
+                <select id="studentSelect" required>
+                  <option value="">Select a student</option>
+                </select>
+              </div>
+
+              <div class="field">
+                <label for="subjectInput">Subject</label>
+                <input id="subjectInput" type="text" maxlength="100" placeholder="e.g. Mathematics" required />
+              </div>
+
+              <div class="field">
+                <label for="assessmentInput">Assessment</label>
+                <input id="assessmentInput" type="text" maxlength="120" placeholder="e.g. Mid-Term Test" required />
+              </div>
+
+              <div class="field">
+                <label for="termSelect">Term</label>
+                <select id="termSelect" required>
+                  <option value="">Select term</option>
+                  <option value="Term 1">Term 1</option>
+                  <option value="Term 2">Term 2</option>
+                  <option value="Term 3">Term 3</option>
+                </select>
+              </div>
+
+              <div class="field">
+                <label for="yearInput">Academic Year</label>
+                <input id="yearInput" type="text" maxlength="20" placeholder="e.g. 2025" required />
+              </div>
+
+              <div class="field">
+                <label for="marksInput">Marks Obtained</label>
+                <input id="marksInput" type="number" min="0" step="0.01" placeholder="e.g. 78" required />
+              </div>
+
+              <div class="field">
+                <label for="totalMarksInput">Total Marks</label>
+                <input id="totalMarksInput" type="number" min="1" step="0.01" placeholder="e.g. 100" required />
+              </div>
+
+              <div class="field">
+                <label for="gradePreview">Calculated Grade</label>
+                <input id="gradePreview" type="text" value="-" readonly aria-readonly="true" />
+              </div>
+            </div>
+
+            <div class="form-actions">
+              <button class="primary-btn" id="saveButton" type="submit">Save Result</button>
+              <button class="secondary-btn hidden" id="cancelEditButton" type="button">Cancel Edit</button>
+            </div>
+          </form>
+
+          <div id="staffMessage" class="message" role="status" aria-live="polite"></div>
+        </div>
+      </section>
+
+      <section id="resultsCard" class="card">
+        <div class="card-header">
+          <h3 id="resultsHeading">Results</h3>
+        </div>
+        <div class="card-body">
+          <div id="studentSummary" class="message info hidden"></div>
+          <div class="table-wrap">
+            <table>
+              <thead>
+                <tr>
+                  <th>Student Name</th>
+                  <th>Class</th>
+                  <th>Subject</th>
+                  <th>Term</th>
+                  <th>Year</th>
+                  <th>Marks</th>
+                  <th>Grade</th>
+                  <th>Actions</th>
+                </tr>
+              </thead>
+              <tbody id="resultsTableBody">
+                <tr>
+                  <td colspan="8" class="empty-state">Loading results...</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script>
+    const SUPABASE_URL = "https://rlgdmvgkzckvjzgcduyg.supabase.co";
+    const SUPABASE_PUBLISHABLE_KEY = "sb_publishable_h4jpZGxZ7EwwSxM6sq9K8A_2Cx7K1IG";
+    const client = window.supabase.createClient(SUPABASE_URL, SUPABASE_PUBLISHABLE_KEY);
+
+    const app = document.getElementById("app");
+    const loadingMessage = document.getElementById("loadingMessage");
+    const staffSection = document.getElementById("staffSection");
+    const resultForm = document.getElementById("resultForm");
+    const studentSelect = document.getElementById("studentSelect");
+    const subjectInput = document.getElementById("subjectInput");
+    const assessmentInput = document.getElementById("assessmentInput");
+    const termSelect = document.getElementById("termSelect");
+    const yearInput = document.getElementById("yearInput");
+    const marksInput = document.getElementById("marksInput");
+    const totalMarksInput = document.getElementById("totalMarksInput");
+    const gradePreview = document.getElementById("gradePreview");
+    const saveButton = document.getElementById("saveButton");
+    const cancelEditButton = document.getElementById("cancelEditButton");
+    const staffMessage = document.getElementById("staffMessage");
+    const resultsTableBody = document.getElementById("resultsTableBody");
+    const resultsHeading = document.getElementById("resultsHeading");
+    const pageBadge = document.getElementById("pageBadge");
+    const pageTitle = document.getElementById("pageTitle");
+    const pageDescription = document.getElementById("pageDescription");
+    const studentSummary = document.getElementById("studentSummary");
+
+    let currentUser = null;
+    let currentRole = null;
+    let allStudents = [];
+    let allResults = [];
+    let editingResultId = null;
+
+    function escapeHtml(value) {
+      return String(value ?? "").replace(/[&<>"']/g, (character) => ({
+        "&": "&amp;",
+        "<": "&lt;",
+        ">": "&gt;",
+        '"': "&quot;",
+        "'": "&#39;"
+      })[character]);
+    }
+
+    function setMessage(element, text, type) {
+      element.textContent = text || "";
+      element.className = "message";
+      if (type) element.classList.add(type);
+    }
+
+    function calculateGrade(marksObtained, totalMarks) {
+      const safeTotal = Number(totalMarks);
+      const safeMarks = Number(marksObtained);
+      if (!safeTotal || safeTotal <= 0 || safeMarks < 0) return "N/A";
+      const percent = (safeMarks / safeTotal) * 100;
+      if (percent >= 90) return "A+";
+      if (percent >= 80) return "A";
+      if (percent >= 70) return "B";
+      if (percent >= 60) return "C";
+      if (percent >= 50) return "D";
+      if (percent >= 40) return "E";
+      return "F";
+    }
+
+    function updateGradePreview() {
+      const marks = Number(marksInput.value);
+      const total = Number(totalMarksInput.value);
+      const grade = calculateGrade(marks, total);
+      gradePreview.value = grade;
+    }
+
+    marksInput.addEventListener("input", updateGradePreview);
+    totalMarksInput.addEventListener("input", updateGradePreview);
+
+    async function loadStudentsForStaff() {
+      const { data, error } = await client
+        .from("students")
+        .select("id, student_number, full_name, class_name")
+        .order("full_name", { ascending: true });
+
+      if (error) {
+        throw error;
+      }
+
+      allStudents = data || [];
+      studentSelect.innerHTML = '<option value="">Select a student</option>' +
+        allStudents.map((student) => `
+          <option value="${student.id}">
+            ${escapeHtml(student.full_name)} (${escapeHtml(student.student_number)}) - ${escapeHtml(student.class_name || "No class")}
+          </option>
+        `).join("");
+    }
+
+    async function loadAcademicResultsForStaff() {
+      const { data, error } = await client
+        .from("academic_results")
+        .select("id, student_id, subject, assessment, term, academic_year, marks_obtained, total_marks, grade")
+        .order("created_at", { ascending: false });
+
+      if (error) {
+        throw error;
+      }
+
+      allResults = data || [];
+      if (!allResults.length) {
+        resultsTableBody.innerHTML = '<tr><td colspan="8" class="empty-state">No results have been entered yet.</td></tr>';
+        return;
+      }
+
+      const studentIds = [...new Set(allResults.map((result) => result.student_id).filter(Boolean))];
+
+      let studentMap = {};
+      if (studentIds.length) {
+        const { data: studentRows, error: studentError } = await client
+          .from("students")
+          .select("id, full_name, class_name, student_number")
+          .in("id", studentIds);
+
+        if (studentError) {
+          throw studentError;
+        }
+
+        studentMap = Object.fromEntries((studentRows || []).map((student) => [student.id, student]));
+      }
+
+      resultsTableBody.innerHTML = allResults.map((result) => {
+        const student = studentMap[result.student_id] || {};
+        const grade = result.grade || calculateGrade(result.marks_obtained, result.total_marks);
+        return `
+          <tr>
+            <td>${escapeHtml(student.full_name || "Unknown student")}</td>
+            <td>${escapeHtml(student.class_name || "-")}</td>
+            <td>${escapeHtml(result.subject || "-")}</td>
+            <td>${escapeHtml(result.term || "-")}</td>
+            <td>${escapeHtml(result.academic_year || "-")}</td>
+            <td>${escapeHtml(result.marks_obtained ?? "-")} / ${escapeHtml(result.total_marks ?? "-")}</td>
+            <td>${escapeHtml(grade)}</td>
+            <td>
+              <div class="result-actions">
+                <button class="compact-btn edit" type="button" data-action="edit-result" data-id="${result.id}">Edit</button>
+                ${currentRole === "admin" ? `<button class="compact-btn delete" type="button" data-action="delete-result" data-id="${result.id}">Delete</button>` : ""}
+              </div>
+            </td>
+          </tr>
+        `;
+      }).join("");
+    }
+
+    async function loadStudentOwnResults() {
+      const { data: profileRow, error: profileError } = await client
+        .from("student_profiles")
+        .select("student_number")
+        .eq("user_id", currentUser.id)
+        .maybeSingle();
+
+      if (profileError) {
+        throw profileError;
+      }
+
+      if (!profileRow || !profileRow.student_number) {
+        resultsTableBody.innerHTML = '<tr><td colspan="8" class="empty-state">No student profile is linked to your account yet.</td></tr>';
+        studentSummary.classList.remove("hidden");
+        studentSummary.textContent = "Student profile is not linked to this account yet.";
+        return;
+      }
+
+      const { data: studentRow, error: studentError } = await client
+        .from("students")
+        .select("id, full_name, class_name, student_number")
+        .eq("student_number", profileRow.student_number)
+        .maybeSingle();
+
+      if (studentError) {
+        throw studentError;
+      }
+
+      if (!studentRow) {
+        resultsTableBody.innerHTML = '<tr><td colspan="8" class="empty-state">No student record matched your profile.</td></tr>';
+        studentSummary.classList.remove("hidden");
+        studentSummary.textContent = "Your student number does not match an active student record.";
+        return;
+      }
+
+      const { data: resultRows, error: resultError } = await client
+        .from("academic_results")
+        .select("id, student_id, subject, assessment, term, academic_year, marks_obtained, total_marks, grade")
+        .eq("student_id", studentRow.id)
+        .order("created_at", { ascending: false });
+
+      if (resultError) {
+        throw resultError;
+      }
+
+      resultsHeading.textContent = `${studentRow.full_name || "Student"} Results`;
+      studentSummary.classList.remove("hidden");
+      studentSummary.textContent = `Student: ${studentRow.full_name} • Class: ${studentRow.class_name || "-"} • Student Number: ${studentRow.student_number}`;
+
+      if (!resultRows || !resultRows.length) {
+        resultsTableBody.innerHTML = '<tr><td colspan="8" class="empty-state">No academic results are available for your account yet.</td></tr>';
+        return;
+      }
+
+      resultsTableBody.innerHTML = resultRows.map((result) => {
+        const grade = result.grade || calculateGrade(result.marks_obtained, result.total_marks);
+        return `
+          <tr>
+            <td>${escapeHtml(studentRow.full_name || "-")}</td>
+            <td>${escapeHtml(studentRow.class_name || "-")}</td>
+            <td>${escapeHtml(result.subject || "-")}</td>
+            <td>${escapeHtml(result.term || "-")}</td>
+            <td>${escapeHtml(result.academic_year || "-")}</td>
+            <td>${escapeHtml(result.marks_obtained ?? "-")} / ${escapeHtml(result.total_marks ?? "-")}</td>
+            <td>${escapeHtml(grade)}</td>
+            <td>View only</td>
+          </tr>
+        `;
+      }).join("");
+    }
+
+    async function loadResults() {
+      if (currentRole === "student") {
+        await loadStudentOwnResults();
+        return;
+      }
+
+      if (currentRole === "admin" || currentRole === "teacher") {
+        await loadAcademicResultsForStaff();
+      }
+    }
+
+    async function initializePage() {
+      try {
+        const { data: { user }, error: userError } = await client.auth.getUser();
+        if (userError || !user) {
+          window.location.replace("login.html");
+          return;
+        }
+
+        currentUser = user;
+
+        const { data: roleRecord, error: roleError } = await client
+          .from("user_roles")
+          .select("role")
+          .eq("id", user.id)
+          .maybeSingle();
+
+        if (roleError) {
+          throw roleError;
+        }
+
+        if (!roleRecord || !roleRecord.role) {
+          setMessage(loadingMessage, "No portal role is assigned to this account. Please contact the school administrator.", "error");
+          await client.auth.signOut();
+          return;
+        }
+
+        currentRole = roleRecord.role;
+
+        if (!["admin", "teacher", "student"].includes(currentRole)) {
+          setMessage(loadingMessage, "Your account is not authorised to use this portal.", "error");
+          return;
+        }
+
+        pageBadge.textContent = currentRole === "admin" ? "ADMIN" : currentRole === "teacher" ? "TEACHER" : "STUDENT";
+        pageTitle.textContent = currentRole === "student" ? "My Academic Results" : "Academic Results";
+        pageDescription.textContent = currentRole === "student"
+          ? "Review your academic performance and recent assessments."
+          : "Add, edit, and review academic performance records for students.";
+
+        if (currentRole === "student") {
+          staffSection.classList.add("hidden");
+          resultsHeading.textContent = "My Results";
+        } else {
+          staffSection.classList.remove("hidden");
+          resultsHeading.textContent = "Academic Results";
+          await loadStudentsForStaff();
+        }
+
+        app.classList.remove("hidden");
+        loadingMessage.classList.add("hidden");
+        await loadResults();
+      } catch (error) {
+        console.error("Academic results page error:", error);
+        loadingMessage.textContent = error.message || "Unable to load the academic results page.";
+        loadingMessage.classList.remove("hidden");
+        loadingMessage.classList.add("error");
+      }
+    }
+
+    function resetForm() {
+      editingResultId = null;
+      resultForm.reset();
+      studentSelect.value = "";
+      gradePreview.value = "-";
+      saveButton.textContent = "Save Result";
+      cancelEditButton.classList.add("hidden");
+      setMessage(staffMessage, "", "");
+    }
+
+    async function saveResult(event) {
+      event.preventDefault();
+
+      if (!["admin", "teacher"].includes(currentRole)) {
+        setMessage(staffMessage, "You are not authorised to save results.", "error");
+        return;
+      }
+
+      const studentId = studentSelect.value;
+      const subject = subjectInput.value.trim();
+      const assessment = assessmentInput.value.trim();
+      const term = termSelect.value;
+      const academicYear = yearInput.value.trim();
+      const marksObtained = Number(marksInput.value);
+      const totalMarks = Number(totalMarksInput.value);
+
+      if (!studentId || !subject || !assessment || !term || !academicYear || !Number.isFinite(marksObtained) || !Number.isFinite(totalMarks) || totalMarks <= 0) {
+        setMessage(staffMessage, "Please complete all fields and enter valid marks.", "error");
+        return;
+      }
+
+      if (marksObtained < 0 || marksObtained > totalMarks) {
+        setMessage(staffMessage, "Marks obtained must be greater than or equal to 0 and cannot exceed total marks.", "error");
+        return;
+      }
+
+      const payload = {
+        student_id: Number(studentId),
+        subject,
+        assessment,
+        term,
+        academic_year: academicYear,
+        marks_obtained: marksObtained,
+        total_marks: totalMarks,
+        grade: calculateGrade(marksObtained, totalMarks)
+      };
+
+      saveButton.disabled = true;
+      setMessage(staffMessage, editingResultId ? "Updating academic result..." : "Saving academic result...", "info");
+
+      try {
+        let result;
+        if (editingResultId) {
+          result = await client
+            .from("academic_results")
+            .update(payload)
+            .eq("id", editingResultId)
+            .select("id");
+        } else {
+          result = await client
+            .from("academic_results")
+            .insert([payload])
+            .select("id");
+        }
+
+        if (result.error) {
+          throw result.error;
+        }
+
+        setMessage(staffMessage, editingResultId ? "Academic result updated successfully." : "Academic result saved successfully.", "success");
+        resetForm();
+        await loadAcademicResultsForStaff();
+      } catch (error) {
+        console.error("Save academic result error:", error);
+        setMessage(staffMessage, error.message || "Could not save the result.", "error");
+      } finally {
+        saveButton.disabled = false;
+      }
+    }
+
+    async function handleResultTableAction(event) {
+      const actionButton = event.target.closest("button[data-action]");
+      if (!actionButton) return;
+
+      const action = actionButton.dataset.action;
+      const resultId = Number(actionButton.dataset.id);
+
+      if (!resultId) return;
+
+      if (action === "edit-result") {
+        const result = allResults.find((item) => Number(item.id) === resultId);
+        if (!result) {
+          setMessage(staffMessage, "This result could not be found.", "error");
+          return;
+        }
+
+        editingResultId = result.id;
+        studentSelect.value = String(result.student_id);
+        subjectInput.value = result.subject || "";
+        assessmentInput.value = result.assessment || "";
+        termSelect.value = result.term || "";
+        yearInput.value = result.academic_year || "";
+        marksInput.value = result.marks_obtained ?? "";
+        totalMarksInput.value = result.total_marks ?? "";
+        updateGradePreview();
+
+        saveButton.textContent = "Update Result";
+        cancelEditButton.classList.remove("hidden");
+        setMessage(staffMessage, "Editing selected academic result.", "info");
+        window.scrollTo({ top: 0, behavior: "smooth" });
+        subjectInput.focus();
+        return;
+      }
+
+      if (action === "delete-result") {
+        if (currentRole !== "admin") {
+          setMessage(staffMessage, "Only administrators can delete academic results.", "error");
+          return;
+        }
+
+        const confirmed = window.confirm("Delete this academic result? This action cannot be undone.");
+        if (!confirmed) return;
+
+        try {
+          const { error } = await client
+            .from("academic_results")
+            .delete()
+            .eq("id", resultId);
+
+          if (error) throw error;
+
+          setMessage(staffMessage, "Academic result deleted successfully.", "success");
+          resetForm();
+          await loadAcademicResultsForStaff();
+        } catch (error) {
+          console.error("Delete academic result error:", error);
+          setMessage(staffMessage, error.message || "The result could not be deleted.", "error");
+        }
+      }
+    }
+
+    resultForm.addEventListener("submit", saveResult);
+    cancelEditButton.addEventListener("click", resetForm);
+    document.getElementById("resultsTableBody").addEventListener("click", handleResultTableAction);
+
+    document.getElementById("logoutButton").addEventListener("click", async () => {
+      try {
+        await client.auth.signOut();
+      } catch (error) {
+        console.error("Logout failed:", error);
+      }
+      window.location.replace("login.html");
+    });
+
+    initializePage();
+  </script>
+</body>
+</html>
