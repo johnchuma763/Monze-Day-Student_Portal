@@ -29,6 +29,13 @@
             display: flex;
             align-items: center;
             gap: 12px;
+            flex-wrap: wrap;
+        }
+        .header-link {
+            color: #fff;
+            text-decoration: none;
+            font-weight: 700;
+            opacity: 0.9;
         }
         .logout-btn {
             background: rgba(255,255,255,0.12);
@@ -72,10 +79,11 @@
             color: #10264b;
         }
         .stat {
-            font-size: 2rem;
+            font-size: clamp(1.5rem, 2vw, 2rem);
             font-weight: 700;
             color: #1769e0;
             margin-bottom: 6px;
+            min-height: 2.4rem;
         }
         .section {
             margin-top: 24px;
@@ -83,25 +91,59 @@
         .muted {
             color: #667085;
         }
+        .message {
+            margin: 0 0 18px;
+            padding: 12px 14px;
+            border-radius: 10px;
+            font-size: 0.95rem;
+            line-height: 1.5;
+        }
+        .message.info {
+            background: #edf5ff;
+            color: #1d4f91;
+            border: 1px solid #cfe0ff;
+        }
+        .message.error {
+            background: #fff0f0;
+            color: #b42318;
+            border: 1px solid #f8d7d7;
+        }
+        .hidden {
+            display: none !important;
+        }
+        .results-table-wrap {
+            overflow-x: auto;
+        }
         .grades {
             width: 100%;
             border-collapse: collapse;
+            min-width: 760px;
         }
         .grades th,
         .grades td {
             text-align: left;
             padding: 12px;
             border-bottom: 1px solid #edf2f7;
+            vertical-align: top;
         }
         .grades th {
             color: #10264b;
             background: #f8fafc;
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+        .empty-state {
+            text-align: center;
+            color: #667085;
+            padding: 24px 12px;
         }
         @media (max-width: 760px) {
             .grid { grid-template-columns: 1fr; }
             .header { flex-wrap: wrap; }
             .grades { font-size: 0.9rem; }
             .grades th, .grades td { padding: 9px 6px; }
+            .welcome { padding: 20px 18px; }
         }
     </style>
 </head>
@@ -109,6 +151,7 @@
     <header class="header">
         <h1>Monze Day Secondary School</h1>
         <div class="nav-actions">
+            <a class="header-link" href="index.html">← Home</a>
             <span>Student Portal</span>
             <button class="logout-btn" type="button" id="logoutButton">Logout</button>
         </div>
@@ -116,89 +159,255 @@
 
     <main class="content">
         <section class="welcome">
-            <h2 id="welcomeHeading">Welcome, Student</h2>
-            <p class="muted">Here is an overview of your learning and upcoming school activities.</p>
+            <h2 id="welcomeHeading">Loading your dashboard...</h2>
+            <p class="muted" id="welcomeSubtext">Checking your student account and academic records.</p>
         </section>
+
+        <div id="loadingMessage" class="message info" aria-live="polite">Loading your academic results...</div>
+        <div id="errorMessage" class="message error hidden" aria-live="assertive"></div>
 
         <section class="grid" aria-label="Student overview">
             <article class="card">
-                <div class="stat">92%</div>
-                <h3>Attendance</h3>
-                <p class="muted">Attendance summary for this term.</p>
+                <div class="stat" id="resultsCount">—</div>
+                <h3>Results</h3>
+                <p class="muted">Academic records available to you.</p>
             </article>
             <article class="card">
-                <div class="stat">3</div>
-                <h3>Assignments</h3>
-                <p class="muted">Assignments due this week.</p>
+                <div class="stat" id="averagePercent">—</div>
+                <h3>Average %</h3>
+                <p class="muted">Average across all loaded results.</p>
             </article>
             <article class="card">
-                <div class="stat">B+</div>
-                <h3>Current average</h3>
-                <p class="muted">Average across recent assessments.</p>
+                <div class="stat" id="latestGrade">—</div>
+                <h3>Latest Grade</h3>
+                <p class="muted">Most recent saved result grade.</p>
             </article>
         </section>
 
         <section class="card section">
             <h3>Recent results</h3>
-            <p class="muted">Example records shown for the portal preview.</p>
-            <table class="grades">
-                <thead>
-                    <tr><th>Subject</th><th>Assessment</th><th>Score</th><th>Grade</th></tr>
-                </thead>
-                <tbody>
-                    <tr><td>Mathematics</td><td>Mid-term test</td><td>82%</td><td>A</td></tr>
-                    <tr><td>English</td><td>Essay</td><td>76%</td><td>B+</td></tr>
-                    <tr><td>Biology</td><td>Practical</td><td>88%</td><td>A</td></tr>
-                </tbody>
-            </table>
-        </section>
-
-        <section class="grid section">
-            <article class="card">
-                <h3>Upcoming assignments</h3>
-                <ul>
-                    <li>Mathematics: Algebra exercises — Friday</li>
-                    <li>English: Reading response — Monday</li>
-                    <li>Biology: Lab report — Tuesday</li>
-                </ul>
-            </article>
-            <article class="card">
-                <h3>School notices</h3>
-                <ul>
-                    <li>Science Fair registration is open.</li>
-                    <li>Mid-term reports are available from the school office.</li>
-                    <li>Extra lessons begin this week.</li>
-                </ul>
-            </article>
-            <article class="card">
-                <h3>Class schedule</h3>
-                <ul>
-                    <li>08:00 — Mathematics</li>
-                    <li>10:00 — English</li>
-                    <li>13:00 — Biology</li>
-                </ul>
-            </article>
+            <div class="results-table-wrap">
+                <table class="grades">
+                    <thead>
+                        <tr>
+                            <th>Subject</th>
+                            <th>Assessment</th>
+                            <th>Term</th>
+                            <th>Academic Year</th>
+                            <th>Marks</th>
+                            <th>Total</th>
+                            <th>Percentage</th>
+                            <th>Letter Grade</th>
+                        </tr>
+                    </thead>
+                    <tbody id="resultsTableBody">
+                        <tr>
+                            <td colspan="8" class="empty-state">Loading academic results...</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
         </section>
     </main>
 
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     <script>
-        let auth;
-        try {
-            auth = JSON.parse(localStorage.getItem("monzeAuth") || "null");
-        } catch (error) {
-            localStorage.removeItem("monzeAuth");
+        const SUPABASE_URL = "https://rlgdmvgkzckvjzgcduyg.supabase.co";
+        const SUPABASE_PUBLISHABLE_KEY = "sb_publishable_h4jpZGxZ7EwwSxM6sq9K8A_2Cx7K1IG";
+        const client = window.supabase.createClient(SUPABASE_URL, SUPABASE_PUBLISHABLE_KEY);
+
+        const welcomeHeading = document.getElementById("welcomeHeading");
+        const welcomeSubtext = document.getElementById("welcomeSubtext");
+        const loadingMessage = document.getElementById("loadingMessage");
+        const errorMessage = document.getElementById("errorMessage");
+        const resultsTableBody = document.getElementById("resultsTableBody");
+        const resultsCount = document.getElementById("resultsCount");
+        const averagePercent = document.getElementById("averagePercent");
+        const latestGrade = document.getElementById("latestGrade");
+
+        function escapeHtml(value) {
+            return String(value ?? "").replace(/[&<>\"']/g, (character) => ({
+                "&": "&amp;",
+                "<": "&lt;",
+                ">": "&gt;",
+                '"': "&quot;",
+                "'": "&#39;"
+            })[character]);
         }
 
-        if (!auth || auth.role !== "student") {
+        function showError(message) {
+            errorMessage.textContent = message;
+            errorMessage.classList.remove("hidden");
+        }
+
+        function hideError() {
+            errorMessage.textContent = "";
+            errorMessage.classList.add("hidden");
+        }
+
+        function calculatePercent(marksObtained, totalMarks) {
+            const safeMarks = Number(marksObtained);
+            const safeTotal = Number(totalMarks);
+            if (!safeTotal || safeTotal <= 0 || !Number.isFinite(safeMarks)) return null;
+            return (safeMarks / safeTotal) * 100;
+        }
+
+        function calculateLetterGrade(percent) {
+            if (!Number.isFinite(percent)) return "-";
+            if (percent >= 80) return "A";
+            if (percent >= 70) return "B";
+            if (percent >= 60) return "C";
+            if (percent >= 50) return "D";
+            return "F";
+        }
+
+        function formatPercent(value) {
+            if (!Number.isFinite(value)) return "-";
+            return `${value.toFixed(2)}%`;
+        }
+
+        async function loadStudentDashboard() {
+            try {
+                loadingMessage.textContent = "Checking your student account...";
+                loadingMessage.classList.remove("hidden");
+                hideError();
+
+                const { data: { user }, error: userError } = await client.auth.getUser();
+                if (userError || !user) {
+                    window.location.replace("login.html");
+                    return;
+                }
+
+                const { data: profileRow, error: profileError } = await client
+                    .from("student_profiles")
+                    .select("student_number")
+                    .eq("user_id", user.id)
+                    .maybeSingle();
+
+                if (profileError) {
+                    throw profileError;
+                }
+
+                if (!profileRow || !profileRow.student_number) {
+                    welcomeHeading.textContent = "Student profile not linked";
+                    welcomeSubtext.textContent = "Your account is not linked to a student profile yet.";
+                    resultsTableBody.innerHTML = '<tr><td colspan="8" class="empty-state">No student profile is linked to this account yet.</td></tr>';
+                    resultsCount.textContent = "0";
+                    averagePercent.textContent = "-";
+                    latestGrade.textContent = "-";
+                    showError("Your account is not linked to a student profile. Please contact the school administrator.");
+                    loadingMessage.classList.add("hidden");
+                    return;
+                }
+
+                const { data: studentRow, error: studentError } = await client
+                    .from("students")
+                    .select("id, full_name, class_name, student_number")
+                    .eq("student_number", profileRow.student_number)
+                    .maybeSingle();
+
+                if (studentError) {
+                    throw studentError;
+                }
+
+                if (!studentRow) {
+                    welcomeHeading.textContent = "No matching student record";
+                    welcomeSubtext.textContent = "There is no active student record linked to your student number.";
+                    resultsTableBody.innerHTML = '<tr><td colspan="8" class="empty-state">No student record matched your profile.</td></tr>';
+                    resultsCount.textContent = "0";
+                    averagePercent.textContent = "-";
+                    latestGrade.textContent = "-";
+                    showError("Your student number does not match an active student record. Please contact the school administrator.");
+                    loadingMessage.classList.add("hidden");
+                    return;
+                }
+
+                welcomeHeading.textContent = `Welcome, ${studentRow.full_name || "Student"}`;
+                welcomeSubtext.textContent = studentRow.class_name ? `Class: ${studentRow.class_name}` : "Review your academic performance and recent assessments.";
+
+                loadingMessage.textContent = "Loading your academic results...";
+
+                const { data: resultRows, error: resultError } = await client
+                    .from("academic_results")
+                    .select("id, student_id, subject, assessment, term, academic_year, marks_obtained, total_marks, grade")
+                    .eq("student_id", studentRow.id)
+                    .order("created_at", { ascending: false });
+
+                if (resultError) {
+                    throw resultError;
+                }
+
+                if (!resultRows || !resultRows.length) {
+                    resultsTableBody.innerHTML = '<tr><td colspan="8" class="empty-state">No academic results are available for your account yet.</td></tr>';
+                    resultsCount.textContent = "0";
+                    averagePercent.textContent = "-";
+                    latestGrade.textContent = "-";
+                    showError("No results are available for this student yet.");
+                    loadingMessage.classList.add("hidden");
+                    return;
+                }
+
+                const safeResults = resultRows.map((result) => {
+                    const percent = calculatePercent(result.marks_obtained, result.total_marks);
+                    const calculatedGrade = calculateLetterGrade(percent);
+                    return {
+                        ...result,
+                        percentage: percent,
+                        grade: result.grade || calculatedGrade,
+                        displayGrade: result.grade || calculatedGrade
+                    };
+                });
+
+                const totalResults = safeResults.length;
+                const average = safeResults.reduce((sum, result) => sum + (Number.isFinite(result.percentage) ? result.percentage : 0), 0) / totalResults;
+                const latest = safeResults[0];
+
+                resultsCount.textContent = String(totalResults);
+                averagePercent.textContent = formatPercent(average);
+                latestGrade.textContent = latest ? (latest.grade || calculateLetterGrade(latest.percentage)) : "-";
+
+                resultsTableBody.innerHTML = safeResults.map((result) => {
+                    const percent = result.percentage;
+                    const letterGrade = result.grade || calculateLetterGrade(percent);
+                    return `
+                        <tr>
+                            <td>${escapeHtml(result.subject || "-")}</td>
+                            <td>${escapeHtml(result.assessment || "-")}</td>
+                            <td>${escapeHtml(result.term || "-")}</td>
+                            <td>${escapeHtml(result.academic_year || "-")}</td>
+                            <td>${escapeHtml(Number.isFinite(result.marks_obtained) ? result.marks_obtained : "-")}</td>
+                            <td>${escapeHtml(Number.isFinite(result.total_marks) ? result.total_marks : "-")}</td>
+                            <td>${formatPercent(percent)}</td>
+                            <td>${escapeHtml(letterGrade)}</td>
+                        </tr>
+                    `;
+                }).join("");
+
+                loadingMessage.classList.add("hidden");
+                hideError();
+            } catch (error) {
+                console.error("Student dashboard error:", error);
+                welcomeHeading.textContent = "Unable to load dashboard";
+                welcomeSubtext.textContent = "Please refresh the page or contact the school administrator.";
+                resultsTableBody.innerHTML = '<tr><td colspan="8" class="empty-state">Unable to load your academic results right now.</td></tr>';
+                resultsCount.textContent = "-";
+                averagePercent.textContent = "-";
+                latestGrade.textContent = "-";
+                showError(error.message || "Something went wrong while loading your academic results.");
+                loadingMessage.classList.add("hidden");
+            }
+        }
+
+        document.getElementById("logoutButton").addEventListener("click", async () => {
+            try {
+                await client.auth.signOut();
+            } catch (error) {
+                console.error("Logout failed:", error);
+            }
             window.location.replace("login.html");
-        } else if (auth.name) {
-            document.getElementById("welcomeHeading").textContent = `Welcome, ${auth.name}`;
-        }
-
-        document.getElementById("logoutButton").addEventListener("click", () => {
-            localStorage.removeItem("monzeAuth");
-            window.location.href = "login.html";
         });
+
+        loadStudentDashboard();
     </script>
 </body>
 </html>
