@@ -1,0 +1,57 @@
+<svg width="960" height="960" viewBox="0 0 960 960" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="blueGrad" x1="140" y1="120" x2="770" y2="780" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#0E3F8F"/>
+      <stop offset="1" stop-color="#0A2D68"/>
+    </linearGradient>
+    <linearGradient id="goldGrad" x1="250" y1="130" x2="700" y2="720" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#F8D96A"/>
+      <stop offset="1" stop-color="#D7A829"/>
+    </linearGradient>
+    <filter id="shadow" x="-20%" y="-20%" width="140%" height="160%">
+      <feDropShadow dx="0" dy="10" stdDeviation="12" flood-color="#0A234B" flood-opacity="0.18"/>
+    </filter>
+  </defs>
+
+  <g filter="url(#shadow)">
+    <path d="M87 155C87 129.595 107.595 109 133 109H827C852.405 109 873 129.595 873 155V164C873 190.451 852.451 211 826 211H133C107.595 211 87 190.405 87 164V155Z" fill="#0D3E8E"/>
+    <path d="M87 155C87 129.595 107.595 109 133 109H827C852.405 109 873 129.595 873 155V164C873 190.451 852.451 211 826 211H133C107.595 211 87 190.405 87 164V155Z" stroke="#E5BE35" stroke-width="10"/>
+    <path d="M87 155C87 129.595 107.595 109 133 109H827C852.405 109 873 129.595 873 155V164C873 190.451 852.451 211 826 211H133C107.595 211 87 190.405 87 164V155Z" opacity="0.2" fill="white"/>
+    <text x="480" y="171" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="58" font-weight="800" fill="#F5F8FF" letter-spacing="3">MONZE DAY SECONDARY SCHOOL</text>
+  </g>
+
+  <g filter="url(#shadow)">
+    <path d="M480 230C650 230 760 289 760 452C760 650 632 744 480 796C328 744 200 650 200 452C200 289 310 230 480 230Z" fill="#F5F7FB" stroke="#0E3F8F" stroke-width="18"/>
+    <path d="M480 260C625 260 718 314 718 452C718 620 608 700 480 748C352 700 242 620 242 452C242 314 335 260 480 260Z" fill="#F9FBFF" stroke="#E2B939" stroke-width="9"/>
+  </g>
+
+  <g>
+    <path d="M343 330H455C469.359 330 481 341.641 481 356V500H317V356C317 341.641 328.641 330 343 330Z" fill="url(#blueGrad)"/>
+    <path d="M302 356L410 274H550L642 356V501H302V356Z" fill="url(#blueGrad)"/>
+    <path d="M410 288H546L598 355H456L410 288Z" fill="#F4F8FF"/>
+    <path d="M342 398H467L518 467H350L342 398Z" fill="#F4F8FF"/>
+    <path d="M323 373C361 349 394 337 422 337C450 337 484 349 522 373L581 430L518 430H463L410 385L356 430H313L323 373Z" fill="#F4F8FF"/>
+    <path d="M394 331L479 331L446 394H424L394 331Z" fill="#D7AE2B"/>
+    <path d="M268 463L362 456L320 477L232 487L268 463Z" fill="#D7AE2B"/>
+    <path d="M691 463L597 456L639 477L727 487L691 463Z" fill="#D7AE2B"/>
+  </g>
+
+  <g>
+    <path d="M280 504H680C701.539 504 719 521.461 719 543V546C719 567.539 701.539 585 680 585H280C258.461 585 241 567.539 241 546V543C241 521.461 258.461 504 280 504Z" fill="#0D3E8E"/>
+    <path d="M322 546H638C653.464 546 666 558.536 666 574V577C666 592.464 653.464 605 638 605H322C306.536 605 294 592.464 294 577V574C294 558.536 306.536 546 322 546Z" fill="#F7FAFF"/>
+    <path d="M304 540H656L631 571H329L304 540Z" fill="#E4B72C"/>
+  </g>
+
+  <g>
+    <path d="M314 604H646C675.823 604 700 628.177 700 658V666C700 696.823 675.823 721 646 721H314C284.177 721 260 696.823 260 666V658C260 628.177 284.177 604 314 604Z" fill="#0D3E8E"/>
+    <path d="M334 630C393 662 431 678 480 678C529 678 567 662 626 630" stroke="#F4C955" stroke-width="10" stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="M352 640H608C622.359 640 634 651.641 634 666V671C634 685.359 622.359 697 608 697H352C337.641 697 326 685.359 326 671V666C326 651.641 337.641 640 352 640Z" fill="#F4F7FF"/>
+    <path d="M364 675H596" stroke="#0D3E8E" stroke-width="10" stroke-linecap="round"/>
+  </g>
+
+  <g>
+    <path d="M182 740C182 710.177 206.177 686 236 686H724C753.823 686 778 710.177 778 740V765H182V740Z" fill="#0D3E8E"/>
+    <path d="M182 740C182 710.177 206.177 686 236 686H724C753.823 686 778 710.177 778 740V765H182V740Z" stroke="#E0B12F" stroke-width="10"/>
+    <text x="480" y="747" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="44" font-weight="800" fill="#F5F8FF" letter-spacing="2">EDUCATION IS AN EQUALIZER</text>
+  </g>
+</svg>
