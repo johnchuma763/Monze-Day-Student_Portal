@@ -1,494 +1,167 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="theme-color" content="#1769e8">
-  <title>Student Login | Monze Day Secondary School</title>
-
-  <style>
-    * {
-      box-sizing: border-box;
-    }
-
-    :root {
-      --blue: #1769e8;
-      --navy: #102b50;
-      --light-blue: #edf5ff;
-      --text: #172b4d;
-      --muted: #718096;
-      --border: #dce6f5;
-      --success: #16845b;
-      --error: #b42318;
-    }
-
-    body {
-      margin: 0;
-      min-height: 100vh;
-      font-family: Arial, Helvetica, sans-serif;
-      color: var(--text);
-      background: linear-gradient(145deg, #f7faff, #eaf3ff);
-    }
-
-    .top-line {
-      height: 6px;
-      background: var(--blue);
-    }
-
-    header {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 14px;
-      padding: 20px 6%;
-      background: #fff;
-      border-bottom: 1px solid #e7edf6;
-    }
-
-    .brand {
-      display: flex;
-      align-items: center;
-      gap: 14px;
-    }
-
-    .logo {
-      width: 66px;
-      height: 66px;
-      display: grid;
-      place-items: center;
-      flex-shrink: 0;
-      border-radius: 18px;
-      background: var(--blue);
-      color: white;
-      font-size: 25px;
-      font-weight: 800;
-    }
-
-    .brand h2 {
-      margin: 0;
-      color: var(--navy);
-      font-size: clamp(16px, 3vw, 23px);
-    }
-
-    .brand p {
-      margin: 6px 0 0;
-      color: var(--muted);
-      font-size: 11px;
-      letter-spacing: 3px;
-    }
-
-    .home-link {
-      color: var(--blue);
-      font-size: 14px;
-      font-weight: 700;
-      text-decoration: none;
-      white-space: nowrap;
-    }
-
-    main {
-      width: 100%;
-      max-width: 700px;
-      margin: 0 auto;
-      padding: 35px 18px 45px;
-    }
-
-    .intro {
-      margin-bottom: 26px;
-    }
-
-    .badge {
-      display: inline-block;
-      padding: 10px 17px;
-      border-radius: 30px;
-      background: #dcecff;
-      color: var(--blue);
-      font-size: 12px;
-      font-weight: 800;
-      letter-spacing: 1.5px;
-    }
-
-    .intro h1 {
-      margin: 22px 0 12px;
-      color: var(--navy);
-      font-size: clamp(30px, 6vw, 43px);
-      line-height: 1.15;
-      letter-spacing: -1px;
-    }
-
-    .intro p {
-      margin: 0;
-      color: var(--muted);
-      font-size: 16px;
-      line-height: 1.7;
-    }
-
-    .card {
-      padding: 28px;
-      border: 1px solid #ffffff;
-      border-radius: 22px;
-      background: #fff;
-      box-shadow: 0 18px 50px #183c6810;
-    }
-
-    label {
-      display: block;
-      margin: 20px 0 9px;
-      font-size: 14px;
-      font-weight: 700;
-    }
-
-    select,
-    input {
-      width: 100%;
-      min-height: 52px;
-      padding: 14px;
-      border: 1px solid var(--border);
-      border-radius: 11px;
-      outline: none;
-      background: #fbfdff;
-      color: var(--text);
-      font: inherit;
-      font-size: 15px;
-    }
-
-    select:focus,
-    input:focus {
-      border-color: var(--blue);
-      box-shadow: 0 0 0 3px #1769e81b;
-    }
-
-    .password-wrap {
-      position: relative;
-    }
-
-    .password-wrap input {
-      padding-right: 75px;
-    }
-
-    .show-password {
-      position: absolute;
-      top: 50%;
-      right: 12px;
-      transform: translateY(-50%);
-      padding: 8px 4px;
-      border: 0;
-      background: transparent;
-      color: var(--blue);
-      font-weight: 700;
-      cursor: pointer;
-    }
-
-    .sign-in {
-      width: 100%;
-      min-height: 54px;
-      margin-top: 27px;
-      padding: 15px;
-      border: 0;
-      border-radius: 12px;
-      background: var(--blue);
-      color: #fff;
-      font-size: 16px;
-      font-weight: 700;
-      cursor: pointer;
-      transition: background .2s;
-    }
-
-    .sign-in:hover {
-      background: #1057c5;
-    }
-
-    .sign-in:disabled {
-      opacity: .65;
-      cursor: wait;
-    }
-
-    .account-link {
-      margin: 18px 0 0;
-      color: var(--muted);
-      font-size: 14px;
-      text-align: center;
-    }
-
-    .account-link a {
-      color: var(--blue);
-      font-weight: 700;
-      text-decoration: none;
-    }
-
-    .security {
-      display: flex;
-      align-items: flex-start;
-      gap: 10px;
-      margin-top: 23px;
-      padding: 14px;
-      border-radius: 12px;
-      background: var(--light-blue);
-      color: #58739b;
-      font-size: 12px;
-      line-height: 1.6;
-    }
-
-    .security strong {
-      color: var(--blue);
-    }
-
-    #message {
-      margin: 15px 0 0;
-      font-size: 13px;
-      line-height: 1.6;
-      overflow-wrap: anywhere;
-    }
-
-    #message.error {
-      color: var(--error);
-    }
-
-    #message.success {
-      color: var(--success);
-    }
-
-    .back {
-      display: block;
-      margin-top: 24px;
-      padding-top: 21px;
-      border-top: 1px solid #e7edf6;
-      color: var(--blue);
-      text-align: center;
-      font-size: 14px;
-      font-weight: 700;
-      text-decoration: none;
-    }
-
-    footer {
-      padding: 23px 15px;
-      background: #fff;
-      border-top: 1px solid #e4ebf5;
-      color: var(--muted);
-      font-size: 12px;
-      text-align: center;
-    }
-
-    @media (max-width: 480px) {
-      header {
-        padding: 16px;
-      }
-
-      .logo {
-        width: 52px;
-        height: 52px;
-        border-radius: 14px;
-        font-size: 21px;
-      }
-
-      .brand {
-        gap: 10px;
-      }
-
-      .brand p {
-        font-size: 9px;
-        letter-spacing: 2px;
-      }
-
-      .home-link {
-        font-size: 12px;
-      }
-
-      main {
-        padding: 28px 14px 35px;
-      }
-
-      .card {
-        padding: 22px 18px;
-        border-radius: 18px;
-      }
-    }
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#1769e8">
+<title>Student Login | Monze Day Secondary School</title>
+<style>
+  * { box-sizing: border-box; }
+  :root {
+    --blue: #1769e8;
+    --navy: #102b50;
+    --light-blue: #edf5ff;
+    --text: #172b4d;
+    --muted: #718096;
+    --border: #dce6f5;
+  }
+  body { margin:0; min-height:100vh; font-family:Arial,Helvetica,sans-serif; color:var(--text); background:linear-gradient(145deg,#f7faff,#eaf3ff); }
+  .top-line { height:6px; background:var(--blue); }
+  header { display:flex; align-items:center; justify-content:space-between; gap:14px; padding:20px 6%; background:#fff; border-bottom:1px solid #e7edf6; }
+  .brand { display:flex; align-items:center; gap:14px; }
+  .logo {
+    width: 62px; height: 62px; display:block; object-fit:contain; flex-shrink:0;
+  }
+  .brand h2 { margin:0; color:var(--navy); font-size:clamp(16px,3vw,23px); }
+  .brand p { margin:6px 0 0; color:var(--muted); font-size:11px; letter-spacing:3px; }
+  .home-link { color:var(--blue); font-size:14px; font-weight:700; text-decoration:none; white-space:nowrap; }
+  main { width:100%; max-width:700px; margin:0 auto; padding:35px 18px 45px; }
+  .intro { margin-bottom:26px; }
+  .badge { display:inline-block; padding:10px 17px; border-radius:30px; background:#dcecff; color:var(--blue); font-size:12px; font-weight:800; letter-spacing:1.5px; }
+  .intro h1 { margin:22px 0 12px; color:var(--navy); font-size:clamp(30px,6vw,43px); line-height:1.15; letter-spacing:-1px; }
+  .intro p { margin:0; color:var(--muted); font-size:16px; line-height:1.7; }
+  .card { padding:28px; border:1px solid #ffffff; border-radius:22px; background:#fff; box-shadow:0 18px 50px #183c6810; }
+  label { display:block; margin:20px 0 9px; font-size:14px; font-weight:700; }
+  select, input { width:100%; min-height:52px; padding:14px; border:1px solid var(--border); border-radius:11px; outline:none; background:#fbfdff; color:var(--text); font:inherit; font-size:15px; }
+  select:focus, input:focus { border-color:var(--blue); box-shadow:0 0 0 3px #1769e81b; }
+  .password-wrap { position:relative; }
+  .password-wrap input { padding-right:75px; }
+  .show-password { position:absolute; top:50%; right:12px; transform:translateY(-50%); padding:8px 4px; border:0; background:transparent; color:var(--blue); font-weight:700; cursor:pointer; }
+  .sign-in { width:100%; min-height:54px; margin-top:27px; padding:15px; border:0; border-radius:12px; background:var(--blue); color:#fff; font-size:16px; font-weight:700; cursor:pointer; transition:background .2s; }
+  .sign-in:hover { background:#1057c5; }
+  .sign-in:disabled { opacity:.65; cursor:wait; }
+  .security { display:flex; align-items:flex-start; gap:10px; margin-top:23px; padding:14px; border-radius:12px; background:var(--light-blue); color:#58739b; font-size:12px; line-height:1.6; }
+  .security strong { color:var(--blue); }
+  #message { margin:15px 0 0; font-size:13px; line-height:1.6; overflow-wrap:anywhere; }
+  #message.error { color:#b42318; }
+  #message.success { color:#16845b; }
+  .back { display:block; margin-top:24px; padding-top:21px; border-top:1px solid #e7edf6; color:var(--blue); text-align:center; font-size:14px; font-weight:700; text-decoration:none; }
+  footer { padding:23px 15px; background:#fff; border-top:1px solid #e4ebf5; color:var(--muted); font-size:12px; text-align:center; }
+  @media (max-width:480px) { header { padding:16px; } .logo { width:52px; height:52px; } .brand { gap:10px; } .brand p { font-size:9px; letter-spacing:2px; } .home-link { font-size:12px; } main { padding:28px 14px 35px; } .card { padding:22px 18px; border-radius:18px; } }
+</style>
 </head>
-
 <body>
-  <div class="top-line"></div>
+<div class="top-line"></div>
+<header>
+  <div class="brand">
+    <img class="logo" src="assets/monze-school-logo.svg" alt="Monze Day Secondary School logo">
+    <div>
+      <h2>Monze Day Secondary School</h2>
+      <p>STUDENT PORTAL</p>
+    </div>
+  </div>
+  <a class="home-link" href="index.html">← Home</a>
+</header>
+<main>
+  <section class="intro">
+    <span class="badge">WELCOME BACK</span>
+    <h1>Sign in to your account</h1>
+    <p>Access your school information, academic records, class updates and more.</p>
+  </section>
 
-  <header>
-    <div class="brand">
-      <div class="logo">MD</div>
-      <div>
-        <h2>Monze Day Secondary School</h2>
-        <p>STUDENT PORTAL</p>
+  <section class="card">
+    <form id="loginForm">
+      <label for="role">Account Type</label>
+      <select id="role" required>
+        <option value="student">Student</option>
+        <option value="teacher">Teacher</option>
+        <option value="admin">Admin</option>
+      </select>
+
+      <label for="email">Email Address</label>
+      <input id="email" type="email" autocomplete="username" placeholder="Enter your registered email" required>
+
+      <label for="password">Password</label>
+      <div class="password-wrap">
+        <input id="password" type="password" autocomplete="current-password" placeholder="Enter your password" required>
+        <button class="show-password" id="togglePassword" type="button" aria-controls="password" aria-pressed="false">Show</button>
       </div>
+
+      <button class="sign-in" id="loginButton" type="submit"><span id="buttonText">Sign In</span> →</button>
+      <p id="message" role="status" aria-live="polite"></p>
+    </form>
+
+    <div class="security">
+      <span aria-hidden="true">🔒</span>
+      <span><strong>Secure sign-in</strong><br>Your account is authenticated using Supabase.</span>
     </div>
 
-    <a class="home-link" href="index.html">← Home</a>
-  </header>
+    <a class="back" href="index.html">← Back to Homepage</a>
+  </section>
+</main>
+<footer>© Monze Day Secondary School · Student Portal</footer>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script>
+const SUPABASE_URL = "https://rlgdmvgkzckvjzgcduyg.supabase.co";
+const SUPABASE_PUBLISHABLE_KEY = "sb_publishable_h4jpZGxZ7EwwSxM6sq9K8A_2Cx7K1IG";
+const client = window.supabase.createClient(SUPABASE_URL, SUPABASE_PUBLISHABLE_KEY);
+const form = document.getElementById("loginForm");
+const button = document.getElementById("loginButton");
+const buttonText = document.getElementById("buttonText");
+const message = document.getElementById("message");
+const passwordInput = document.getElementById("password");
 
-  <main>
-    <section class="intro">
-      <span class="badge">WELCOME BACK</span>
-      <h1>Sign in to your account</h1>
-      <p>
-        Access your school information, academic records,
-        class updates and more.
-      </p>
-    </section>
+document.getElementById("togglePassword").addEventListener("click", function () {
+  const showing = passwordInput.type === "password";
+  passwordInput.type = showing ? "text" : "password";
+  this.textContent = showing ? "Hide" : "Show";
+  this.setAttribute("aria-pressed", String(showing));
+});
 
-    <section class="card">
-      <form id="loginForm">
-        <label for="role">Account Type</label>
-        <select id="role" required>
-          <option value="student">Student</option>
-          <option value="teacher">Teacher</option>
-          <option value="admin">Admin</option>
-        </select>
+form.addEventListener("submit", async function (event) {
+  event.preventDefault();
+  button.disabled = true;
+  buttonText.textContent = "Signing in...";
+  message.textContent = "";
+  message.className = "";
 
-        <label for="email">Email Address</label>
-        <input
-          id="email"
-          type="email"
-          autocomplete="username"
-          placeholder="Enter your registered email"
-          required
-        >
+  const role = document.getElementById("role").value;
+  const email = document.getElementById("email").value.trim();
+  const password = passwordInput.value;
 
-        <label for="password">Password</label>
-        <div class="password-wrap">
-          <input
-            id="password"
-            type="password"
-            autocomplete="current-password"
-            placeholder="Enter your password"
-            required
-          >
-          <button
-            class="show-password"
-            id="togglePassword"
-            type="button"
-            aria-controls="password"
-            aria-pressed="false"
-          >Show</button>
-        </div>
+  try {
+    const { data, error } = await client.auth.signInWithPassword({ email, password });
+    if (error) throw error;
+    if (!data.user) throw new Error("Your account could not be verified.");
 
-        <button class="sign-in" id="loginButton" type="submit">
-          <span id="buttonText">Sign In</span> →
-        </button>
+    const { data: roleRecord, error: roleError } = await client
+      .from("user_roles")
+      .select("role")
+      .eq("id", data.user.id)
+      .maybeSingle();
 
-        <p id="message" role="status" aria-live="polite"></p>
-      </form>
+    if (roleError) throw roleError;
+    if (!roleRecord) {
+      await client.auth.signOut();
+      throw new Error("No portal role is assigned to this account. Contact your administrator.");
+    }
+    if (roleRecord.role !== role) {
+      await client.auth.signOut();
+      throw new Error("The selected account type does not match your assigned role.");
+    }
 
-      <p class="account-link">
-        New student? <a href="signup.html">Create Account</a>
-      </p>
-
-      <div class="security">
-        <span aria-hidden="true">🔒</span>
-        <span>
-          <strong>Secure sign-in</strong><br>
-          Your account is authenticated using Supabase.
-        </span>
-      </div>
-
-      <a class="back" href="index.html">← Back to Homepage</a>
-    </section>
-  </main>
-
-  <footer>
-    © Monze Day Secondary School · Student Portal
-  </footer>
-
-  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-
-  <script>
-    const SUPABASE_URL =
-      "https://rlgdmvgkzckvjzgcduyg.supabase.co";
-
-    const SUPABASE_PUBLISHABLE_KEY =
-      "sb_publishable_h4jpZGxZ7EwwSxM6sq9K8A_2Cx7K1IG";
-
-    const client = window.supabase.createClient(
-      SUPABASE_URL,
-      SUPABASE_PUBLISHABLE_KEY
-    );
-
-    const form = document.getElementById("loginForm");
-    const button = document.getElementById("loginButton");
-    const buttonText = document.getElementById("buttonText");
-    const message = document.getElementById("message");
-    const passwordInput = document.getElementById("password");
-
-    document.getElementById("togglePassword").addEventListener("click", function () {
-      const showing = passwordInput.type === "password";
-
-      passwordInput.type = showing ? "text" : "password";
-      this.textContent = showing ? "Hide" : "Show";
-      this.setAttribute("aria-pressed", String(showing));
-    });
-
-    form.addEventListener("submit", async function (event) {
-      event.preventDefault();
-
-      button.disabled = true;
-      buttonText.textContent = "Signing in...";
-      message.textContent = "";
-      message.className = "";
-
-      const role = document.getElementById("role").value;
-      const email = document.getElementById("email").value.trim();
-      const password = passwordInput.value;
-
-      try {
-        const { data, error } = await client.auth.signInWithPassword({
-          email,
-          password
-        });
-
-        if (error) throw error;
-
-        if (!data.user) {
-          throw new Error("Your account could not be verified.");
-        }
-
-        const { data: roleRecord, error: roleError } = await client
-          .from("user_roles")
-          .select("role")
-          .eq("id", data.user.id)
-          .maybeSingle();
-
-        if (roleError) throw roleError;
-
-        if (!roleRecord) {
-          await client.auth.signOut();
-          throw new Error(
-            "No portal role is assigned to this account. Contact your administrator."
-          );
-        }
-
-        if (roleRecord.role !== role) {
-          await client.auth.signOut();
-          throw new Error(
-            "The selected account type does not match your assigned role."
-          );
-        }
-
-        const pages = {
-          admin: "admin-dashboard.html",
-          teacher: "teacher-dashboard.html",
-          student: "student-dashboard.html"
-        };
-
-        message.textContent = "Login successful. Opening your dashboard...";
-        message.className = "success";
-
-        window.location.replace(pages[role]);
-
-      } catch (error) {
-        console.error("Portal sign-in error:", error);
-
-        message.textContent =
-          error.message || "Unable to sign in. Please try again.";
-
-        message.className = "error";
-        button.disabled = false;
-        buttonText.textContent = "Sign In";
-      }
-    });
-  </script>
+    const pages = { admin: "admin-dashboard.html", teacher: "teacher-dashboard.html", student: "student-dashboard.html" };
+    message.textContent = "Login successful. Opening your dashboard...";
+    message.className = "success";
+    window.location.replace(pages[role]);
+  } catch (error) {
+    console.error("Portal sign-in error:", error);
+    message.textContent = error.message || "Unable to sign in. Please try again.";
+    message.className = "error";
+    button.disabled = false;
+    buttonText.textContent = "Sign In";
+  }
+});
+</script>
 </body>
 </html>
