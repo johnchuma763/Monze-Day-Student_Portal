@@ -553,7 +553,7 @@
     let editingResultId = null;
 
     function escapeHtml(value) {
-      return String(value ?? "").replace(/[&<>"']/g, (character) => ({
+      return String(value ?? "").replace(/[&<>\"']/g, (character) => ({
         "&": "&amp;",
         "<": "&lt;",
         ">": "&gt;",
@@ -573,12 +573,10 @@
       const safeMarks = Number(marksObtained);
       if (!safeTotal || safeTotal <= 0 || safeMarks < 0) return "N/A";
       const percent = (safeMarks / safeTotal) * 100;
-      if (percent >= 90) return "A+";
       if (percent >= 80) return "A";
       if (percent >= 70) return "B";
       if (percent >= 60) return "C";
       if (percent >= 50) return "D";
-      if (percent >= 40) return "E";
       return "F";
     }
 
@@ -645,7 +643,7 @@
 
       resultsTableBody.innerHTML = allResults.map((result) => {
         const student = studentMap[result.student_id] || {};
-        const grade = result.grade || calculateGrade(result.marks_obtained, result.total_marks);
+        const grade = calculateGrade(result.marks_obtained, result.total_marks);
         return `
           <tr>
             <td>${escapeHtml(student.full_name || "Unknown student")}</td>
@@ -721,7 +719,7 @@
       }
 
       resultsTableBody.innerHTML = resultRows.map((result) => {
-        const grade = result.grade || calculateGrade(result.marks_obtained, result.total_marks);
+        const grade = calculateGrade(result.marks_obtained, result.total_marks);
         return `
           <tr>
             <td>${escapeHtml(studentRow.full_name || "-")}</td>
