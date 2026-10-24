@@ -37,7 +37,7 @@
   .password-wrap { position:relative; }
   .password-wrap input { padding-right:75px; }
   .show-password { position:absolute; top:50%; right:12px; transform:translateY(-50%); padding:8px 4px; border:0; background:transparent; color:var(--blue); font-weight:700; cursor:pointer; }
-  .sign-in { width:100%; min-height:54px; margin-top:27px; padding:15px; border:0; border-radius:12px; background:var(--blue); color:#fff; font-size:16px; font-weight:700; cursor:pointer; transition:background .2s; }
+  .sign-in { width:100%; min-height:54px; margin-top:27px; padding:15px; border:0; border-radius:12px; background:var(--blue); color:#fff; font-size:16px; font-weight:700; cursor:pointer; transition:background .2s ease; }
   .sign-in:hover { background:#1057c5; }
   .sign-in:disabled { opacity:.65; cursor:wait; }
   .security { display:flex; align-items:flex-start; gap:10px; margin-top:23px; padding:14px; border-radius:12px; background:var(--light-blue); color:#58739b; font-size:12px; line-height:1.6; }
@@ -47,14 +47,14 @@
   #message.success { color:#16845b; }
   .back { display:block; margin-top:24px; padding-top:21px; border-top:1px solid #e7edf6; color:var(--blue); text-align:center; font-size:14px; font-weight:700; text-decoration:none; }
   footer { padding:23px 15px; background:#fff; border-top:1px solid #e4ebf5; color:var(--muted); font-size:12px; text-align:center; }
-  @media (max-width:480px) { header { padding:16px; } .logo { width:52px; height:52px; } .brand { gap:10px; } .brand p { font-size:9px; letter-spacing:2px; } .home-link { font-size:12px; } main { padding:28px 14px 35px; } .card { padding:22px 18px; border-radius:18px; } }
+  @media (max-width:480px) { header { padding:16px; } .logo { width:52px; height:52px; } .brand { gap:10px; } .brand p { font-size:9px; letter-spacing:2px; } .home-link { font-size:12px; } main { padding-top:26px; } .card { padding:20px; } }
 </style>
 </head>
 <body>
 <div class="top-line"></div>
 <header>
   <div class="brand">
-    <img class="logo" src="assets/monze-school-logo.svg" alt="Monze Day Secondary School logo">
+    <img class="logo" src="./school-logo.png" alt="Monze Day Secondary School Crest">
     <div>
       <h2>Monze Day Secondary School</h2>
       <p>STUDENT PORTAL</p>
