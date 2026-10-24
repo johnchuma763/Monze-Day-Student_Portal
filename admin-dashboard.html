@@ -3,107 +3,76 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Admin Dashboard | Monze Day Student Portal</title>
+<title>Admin Dashboard | Monze Day Secondary School</title>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <style>
 :root {
-  --blue: #2167dc;
-  --dark: #152b4d;
-  --muted: #65748b;
-  --light: #f1f6ff;
-  --border: #dfe7f2;
+  --blue:#2167dc;
+  --dark:#152b4d;
+  --muted:#65748b;
+  --light:#f1f6ff;
+  --border:#dfe7f2;
+  --red:#c62828;
 }
-* { box-sizing: border-box; }
-body {
-  margin: 0;
-  font-family: Arial, Helvetica, sans-serif;
-  background: #fff;
-  color: var(--dark);
-}
+* {box-sizing:border-box}
+body {margin:0;font-family:Arial,sans-serif;background:#fff;color:var(--dark)}
 header {
-  padding: 20px 5%;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  gap: 15px;
-  border-bottom: 1px solid var(--border);
-  flex-wrap: wrap;
+  padding:20px 5%;display:flex;justify-content:space-between;
+  align-items:center;gap:15px;flex-wrap:wrap;border-bottom:1px solid var(--border)
 }
-.brand { display: flex; align-items: center; gap: 14px; }
+.brand {display:flex;align-items:center;gap:14px}
 .logo {
-  width: 64px; height: 64px;
-  border-radius: 20px;
-  background: var(--blue);
-  color: white;
-  display: grid; place-items: center;
-  font-size: 25px; font-weight: bold;
+  width:58px;height:58px;border-radius:17px;background:var(--blue);
+  color:white;display:grid;place-items:center;font-size:23px;font-weight:bold
 }
-.brand h1 { font-size: 21px; margin: 0 0 6px; }
-.brand p {
-  margin: 0; font-size: 12px;
-  letter-spacing: 3px; color: var(--muted);
+.brand h1 {font-size:19px;margin:0 0 6px}
+.brand p {margin:0;font-size:12px;letter-spacing:3px;color:var(--muted)}
+button,.button {
+  border:0;border-radius:10px;padding:12px 16px;font-size:14px;
+  font-weight:bold;cursor:pointer;text-decoration:none;display:inline-block
 }
-button, .button {
-  border: 0; border-radius: 12px;
-  padding: 14px 19px; font-size: 15px;
-  font-weight: bold; cursor: pointer;
-  text-decoration: none; display: inline-block;
+.blue {background:var(--blue);color:white}
+.white {background:white;color:var(--dark);border:1px solid var(--border)}
+.danger {background:var(--red);color:white}
+main {max-width:1100px;margin:auto;padding:30px 18px}
+.hero {background:linear-gradient(135deg,#edf4ff,#f8faff);border-radius:22px;padding:30px;margin-bottom:24px}
+.badge {display:inline-block;background:#dceaff;color:#2464c8;border-radius:25px;padding:9px 14px;font-size:12px;font-weight:bold;letter-spacing:1px}
+.hero h2 {font-size:clamp(28px,5vw,42px);margin:18px 0 10px}
+.hero p {color:var(--muted);line-height:1.6}
+.grid {display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:20px}
+.card {border:1px solid var(--border);border-radius:17px;padding:22px;margin-bottom:22px;box-shadow:0 8px 25px #183b6908}
+.card h3 {margin-top:0;font-size:21px}
+label {display:block;font-weight:bold;margin:14px 0 7px}
+input,select {
+  width:100%;padding:13px;border:1px solid #cbd7e7;border-radius:9px;
+  background:white;color:var(--dark);font-size:16px
 }
-.blue { background: var(--blue); color: white; }
-.white { background: white; color: var(--dark); border: 1px solid var(--border); }
-main { max-width: 1050px; margin: auto; padding: 35px 20px; }
-.hero {
-  background: linear-gradient(135deg, #edf4ff, #f8faff);
-  border-radius: 24px; padding: 35px;
-  margin-bottom: 25px;
-}
-.badge {
-  display: inline-block; background: #dceaff;
-  color: #2464c8; border-radius: 30px;
-  padding: 10px 16px; font-weight: bold;
-  letter-spacing: 1px; font-size: 13px;
-}
-.hero h2 { font-size: clamp(30px, 5vw, 45px); margin: 20px 0 12px; }
-.hero p { color: var(--muted); font-size: 17px; line-height: 1.7; }
-.grid {
-  display: grid; grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 22px;
-}
-.card {
-  background: white; border: 1px solid var(--border);
-  border-radius: 18px; padding: 25px;
-  box-shadow: 0 8px 25px #183b6908;
-  margin-bottom: 22px;
-}
-.card h3 { margin-top: 0; font-size: 22px; }
-label { display: block; font-weight: bold; margin: 16px 0 8px; }
-input, select {
-  width: 100%; padding: 14px;
-  border: 1px solid #cbd7e7; border-radius: 10px;
-  background: white; color: var(--dark); font-size: 16px;
-}
-form button { margin-top: 18px; width: 100%; }
-.message { margin-top: 15px; line-height: 1.5; overflow-wrap: anywhere; }
-.muted { color: var(--muted); }
-.table-wrap { overflow-x: auto; }
-table { width: 100%; border-collapse: collapse; min-width: 420px; }
-th, td { text-align: left; padding: 13px 10px; border-bottom: 1px solid var(--border); }
-th { background: var(--light); }
-#app { display: none; }
-#loading { padding: 35px; text-align: center; }
-footer { text-align: center; padding: 25px; color: var(--muted); border-top: 1px solid var(--border); }
-@media(max-width: 650px) {
-  header { padding: 16px; }
-  .brand h1 { font-size: 16px; }
-  .logo { width: 52px; height: 52px; border-radius: 16px; }
-  .grid { grid-template-columns: 1fr; }
-  .hero { padding: 25px 20px; }
-  main { padding: 24px 15px; }
-  .card { padding: 20px; }
+form button {margin-top:17px;width:100%}
+.muted {color:var(--muted);line-height:1.5}
+.message {margin-top:12px;overflow-wrap:anywhere;line-height:1.5}
+.table-wrap {overflow-x:auto;margin-top:15px}
+table {width:100%;border-collapse:collapse;min-width:590px}
+th,td {padding:12px 10px;text-align:left;border-bottom:1px solid var(--border)}
+th {background:var(--light)}
+.actions {display:flex;gap:7px}
+.actions button {padding:8px 10px}
+#app {display:none}
+#loading {padding:35px;text-align:center}
+#searchInput {margin:15px 0}
+footer {text-align:center;padding:25px;color:var(--muted);border-top:1px solid var(--border)}
+@media(max-width:720px) {
+  .grid {grid-template-columns:1fr}
+  header {padding:15px}
+  .brand h1 {font-size:16px}
+  .logo {width:48px;height:48px}
+  main {padding:22px 13px}
+  .hero {padding:23px 19px}
+  .card {padding:18px}
 }
 </style>
 </head>
 <body>
+
 <header>
   <div class="brand">
     <div class="logo">MD</div>
@@ -112,7 +81,7 @@ footer { text-align: center; padding: 25px; color: var(--muted); border-top: 1px
       <p>STUDENT PORTAL</p>
     </div>
   </div>
-  <button id="logoutButton" class="blue">Log Out</button>
+  <button class="blue" id="logoutButton">Log Out</button>
 </header>
 
 <div id="loading">Checking administrator access...</div>
@@ -121,20 +90,20 @@ footer { text-align: center; padding: 25px; color: var(--muted); border-top: 1px
   <section class="hero">
     <span class="badge">ADMIN DASHBOARD</span>
     <h2>Manage your school portal.</h2>
-    <p>Add student records and view the information saved in the school database.</p>
+    <p>Add students, search records, and correct student details.</p>
     <a href="index.html" class="button white">Back to Homepage</a>
   </section>
 
   <div class="grid">
     <section class="card">
-      <h3>🎓 Add Student</h3>
+      <h3 id="formHeading">🎓 Add Student</h3>
       <p class="muted">Enter the student's details below.</p>
       <form id="studentForm">
         <label for="studentNumber">Student Number</label>
-        <input id="studentNumber" maxlength="50" required placeholder="e.g. MD001">
+        <input id="studentNumber" required maxlength="50" placeholder="e.g. MD001">
 
         <label for="fullName">Full Name</label>
-        <input id="fullName" maxlength="150" required placeholder="Student's full name">
+        <input id="fullName" required maxlength="150" placeholder="Student's full name">
 
         <label for="className">Class</label>
         <select id="className" required>
@@ -145,54 +114,80 @@ footer { text-align: center; padding: 25px; color: var(--muted); border-top: 1px
           <option>Form 4</option>
           <option>Form 5</option>
         </select>
-        <button type="submit" class="blue">Save Student</button>
+
+        <button class="blue" type="submit" id="saveButton">Save Student</button>
+        <button class="white" type="button" id="cancelButton" hidden>Cancel Editing</button>
       </form>
       <div id="status" class="message" role="status"></div>
     </section>
 
     <section class="card">
-      <h3>📋 Student Records</h3>
-      <p class="muted">View student records stored in the database.</p>
-      <button id="refreshButton" class="white" type="button">Refresh Records</button>
+      <h3>📊 Student Management</h3>
+      <p class="muted">Search for a student by number, name, or class.</p>
+      <input id="searchInput" type="search" placeholder="Search students...">
+      <button class="white" id="refreshButton" type="button">Refresh Records</button>
       <p id="recordStatus" class="muted"></p>
-      <div class="table-wrap">
-        <table>
-          <thead><tr><th>Student Number</th><th>Full Name</th><th>Class</th></tr></thead>
-          <tbody id="studentRows">
-            <tr><td colspan="3">Loading records...</td></tr>
-          </tbody>
-        </table>
-      </div>
     </section>
   </div>
+
+  <section class="card">
+    <h3>📋 Student Records</h3>
+    <p class="muted">Edit details or delete a record when necessary.</p>
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>Student Number</th>
+            <th>Full Name</th>
+            <th>Class</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody id="studentRows">
+          <tr><td colspan="4">Loading records...</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
 </main>
 
 <footer>Monze Day Secondary School | Student Portal</footer>
 
 <script>
 const SUPABASE_URL = "https://rlgdmvgkzckvjzgcduyg.supabase.co";
-const SUPABASE_PUBLISHABLE_KEY = "sb_publishable_h4jpZGxZ7EwwSxM6sq9K8A_2Cx7K1IG";
-const client = window.supabase.createClient(SUPABASE_URL, SUPABASE_PUBLISHABLE_KEY);
+const SUPABASE_PUBLISHABLE_KEY =
+  "sb_publishable_h4jpZGxZ7EwwSxM6sq9K8A_2Cx7K1IG";
+
+const client = window.supabase.createClient(
+  SUPABASE_URL, SUPABASE_PUBLISHABLE_KEY
+);
 
 const loading = document.getElementById("loading");
 const app = document.getElementById("app");
 const statusBox = document.getElementById("status");
 const studentRows = document.getElementById("studentRows");
+
 let authorized = false;
+let students = [];
+let editingId = null;
 
 async function checkAdminAccess() {
   try {
-    const { data: { user }, error } = await client.auth.getUser();
+    const {data: {user}, error} = await client.auth.getUser();
+
     if (error || !user) {
       window.location.replace("login.html");
       return;
     }
 
-    const { data: roleRecord, error: roleError } = await client
-      .from("user_roles").select("role").eq("id", user.id).maybeSingle();
+    const {data: roleRecord, error: roleError} = await client
+      .from("user_roles")
+      .select("role")
+      .eq("id", user.id)
+      .maybeSingle();
 
     if (roleError || !roleRecord || roleRecord.role !== "admin") {
-      loading.textContent = "Access denied. This account is not an administrator.";
+      loading.textContent = "Access denied. Administrator access is required.";
       await client.auth.signOut();
       return;
     }
@@ -201,72 +196,182 @@ async function checkAdminAccess() {
     loading.style.display = "none";
     app.style.display = "block";
     await loadStudents();
-  } catch (e) {
-    loading.textContent = "Unable to check access. Please reload and try again.";
+  } catch (error) {
+    loading.textContent = "Could not check access. Please reload the page.";
   }
 }
 
-document.getElementById("studentForm").addEventListener("submit", async function(e) {
-  e.preventDefault();
+function escapeHTML(value) {
+  return String(value ?? "").replace(/[&<>"']/g, char => ({
+    "&":"&amp;",
+    "<":"&lt;",
+    ">":"&gt;",
+    '"':"&quot;",
+    "'":"&#39;"
+  })[char]);
+}
+
+async function loadStudents() {
+  if (!authorized) return;
+
+  studentRows.innerHTML =
+    '<tr><td colspan="4">Loading records...</td></tr>';
+
+  const {data, error} = await client
+    .from("students")
+    .select("id,student_number,full_name,class_name")
+    .order("student_number", {ascending:true});
+
+  if (error) {
+    students = [];
+    studentRows.innerHTML =
+      '<tr><td colspan="4">Could not load student records.</td></tr>';
+    document.getElementById("recordStatus").textContent = error.message;
+    return;
+  }
+
+  students = data || [];
+  renderStudents();
+}
+
+function renderStudents() {
+  const query = document.getElementById("searchInput").value.trim().toLowerCase();
+
+  const filtered = students.filter(student =>
+    [student.student_number, student.full_name, student.class_name]
+      .some(value => String(value || "").toLowerCase().includes(query))
+  );
+
+  document.getElementById("recordStatus").textContent =
+    filtered.length + " matching student(s) · " +
+    students.length + " total";
+
+  if (!filtered.length) {
+    studentRows.innerHTML =
+      '<tr><td colspan="4">No matching student records found.</td></tr>';
+    return;
+  }
+
+  studentRows.innerHTML = filtered.map(student => `
+    <tr>
+      <td>${escapeHTML(student.student_number)}</td>
+      <td>${escapeHTML(student.full_name)}</td>
+      <td>${escapeHTML(student.class_name)}</td>
+      <td>
+        <div class="actions">
+          <button class="blue" data-action="edit" data-id="${escapeHTML(student.id)}">Edit</button>
+          <button class="danger" data-action="delete" data-id="${escapeHTML(student.id)}">Delete</button>
+        </div>
+      </td>
+    </tr>
+  `).join("");
+}
+
+document.getElementById("studentForm").addEventListener("submit", async event => {
+  event.preventDefault();
   if (!authorized) return;
 
   const student_number = document.getElementById("studentNumber").value.trim();
   const full_name = document.getElementById("fullName").value.trim();
   const class_name = document.getElementById("className").value;
 
-  statusBox.textContent = "Saving student...";
-  const { error } = await client.from("students").insert([
-    { student_number, full_name, class_name }
-  ]);
-
-  if (error) {
-    statusBox.textContent = error.code === "23505"
-      ? "That student number already exists. Please use a unique number."
-      : "Could not save student: " + error.message;
+  if (!student_number || !full_name || !class_name) {
+    statusBox.textContent = "Please fill in all fields.";
     return;
   }
 
-  statusBox.textContent = "Student saved successfully!";
-  this.reset();
-  await loadStudents();
+  const saveButton = document.getElementById("saveButton");
+  saveButton.disabled = true;
+  statusBox.textContent = editingId ? "Updating student..." : "Saving student...";
+
+  try {
+    let result;
+
+    if (editingId !== null) {
+      result = await client.from("students")
+        .update({student_number, full_name, class_name})
+        .eq("id", editingId);
+    } else {
+      result = await client.from("students")
+        .insert([{student_number, full_name, class_name}]);
+    }
+
+    if (result.error) {
+      statusBox.textContent = result.error.code === "23505"
+        ? "That student number already exists."
+        : "Error: " + result.error.message;
+      return;
+    }
+
+    statusBox.textContent = editingId
+      ? "Student updated successfully!"
+      : "Student added successfully!";
+
+    resetForm();
+    await loadStudents();
+  } catch (error) {
+    statusBox.textContent = "Something went wrong. Please try again.";
+  } finally {
+    saveButton.disabled = false;
+  }
 });
 
-function escapeHTML(value) {
-  return String(value).replace(/[&<>"']/g, c => ({
-    "&":"&amp;", "<":"&lt;", ">":"&gt;", '"':"&quot;", "'":"&#39;"
-  })[c]);
-}
+studentRows.addEventListener("click", async event => {
+  const button = event.target.closest("button[data-action]");
+  if (!button || !authorized) return;
 
-async function loadStudents() {
-  if (!authorized) return;
-  studentRows.innerHTML = '<tr><td colspan="3">Loading records...</td></tr>';
+  const student = students.find(s => String(s.id) === button.dataset.id);
+  if (!student) return;
 
-  const { data, error } = await client.from("students")
-    .select("student_number,full_name,class_name")
-    .order("student_number");
-
-  if (error) {
-    studentRows.innerHTML = '<tr><td colspan="3">Could not load records.</td></tr>';
-    document.getElementById("recordStatus").textContent = error.message;
+  if (button.dataset.action === "edit") {
+    editingId = student.id;
+    document.getElementById("studentNumber").value = student.student_number;
+    document.getElementById("fullName").value = student.full_name;
+    document.getElementById("className").value = student.class_name;
+    document.getElementById("formHeading").textContent = "✏️ Edit Student";
+    document.getElementById("saveButton").textContent = "Update Student";
+    document.getElementById("cancelButton").hidden = false;
+    statusBox.textContent = "Editing " + student.full_name;
+    document.getElementById("studentNumber").focus();
+    window.scrollTo({top:0, behavior:"smooth"});
     return;
   }
 
-  document.getElementById("recordStatus").textContent =
-    data.length + " student record(s)";
+  if (button.dataset.action === "delete") {
+    const confirmed = confirm(
+      "Delete the record for " + student.full_name +
+      " (" + student.student_number + ")? This cannot be undone."
+    );
+    if (!confirmed) return;
 
-  if (!data.length) {
-    studentRows.innerHTML = '<tr><td colspan="3">No students added yet.</td></tr>';
-    return;
+    button.disabled = true;
+    const {error} = await client.from("students")
+      .delete().eq("id", student.id);
+
+    if (error) {
+      alert("Could not delete student: " + error.message);
+      button.disabled = false;
+      return;
+    }
+
+    if (String(editingId) === String(student.id)) resetForm();
+    await loadStudents();
+    statusBox.textContent = "Student record deleted.";
   }
+});
 
-  studentRows.innerHTML = data.map(s =>
-    '<tr><td>' + escapeHTML(s.student_number) +
-    '</td><td>' + escapeHTML(s.full_name) +
-    '</td><td>' + escapeHTML(s.class_name) + '</td></tr>'
-  ).join("");
+function resetForm() {
+  editingId = null;
+  document.getElementById("studentForm").reset();
+  document.getElementById("formHeading").textContent = "🎓 Add Student";
+  document.getElementById("saveButton").textContent = "Save Student";
+  document.getElementById("cancelButton").hidden = true;
 }
 
+document.getElementById("cancelButton").addEventListener("click", resetForm);
+document.getElementById("searchInput").addEventListener("input", renderStudents);
 document.getElementById("refreshButton").addEventListener("click", loadStudents);
+
 document.getElementById("logoutButton").addEventListener("click", async () => {
   await client.auth.signOut();
   window.location.replace("login.html");
@@ -275,4 +380,4 @@ document.getElementById("logoutButton").addEventListener("click", async () => {
 checkAdminAccess();
 </script>
 </body>
-</html>
+      </html>
