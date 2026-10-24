@@ -1,0 +1,27 @@
+<svg width="220" height="220" viewBox="0 0 220 220" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bgGrad" x1="20" y1="20" x2="200" y2="200" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#103B7A"/>
+      <stop offset="1" stop-color="#0D244C"/>
+    </linearGradient>
+    <linearGradient id="goldGrad" x1="40" y1="30" x2="180" y2="190" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#F7D77C"/>
+      <stop offset="1" stop-color="#D7A93A"/>
+    </linearGradient>
+  </defs>
+
+  <circle cx="110" cy="110" r="104" fill="url(#bgGrad)"/>
+  <circle cx="110" cy="110" r="94" fill="#F7FAFF"/>
+  <circle cx="110" cy="110" r="86" fill="none" stroke="url(#goldGrad)" stroke-width="8"/>
+
+  <path d="M68 54C84 46 95 44 109 44C123 44 136 46 152 54V78L140 85V147C125 156 118 159 109 159C100 159 93 156 78 147V85L66 78V54H68Z" fill="#102B50"/>
+  <path d="M82 80H136V88H82V80ZM82 94H136V102H82V94ZM82 108H128V116H82V108ZM82 122H124V130H82V122Z" fill="#F7FAFF"/>
+  <path d="M68 54C84 46 95 44 109 44C123 44 136 46 152 54V78L140 85V147C125 156 118 159 109 159C100 159 93 156 78 147V85L66 78V54H68Z" stroke="url(#goldGrad)" stroke-width="4"/>
+
+  <path d="M110 58L116 73L132 73L119 83L124 98L110 89L96 98L101 83L88 73L104 73L110 58Z" fill="url(#goldGrad)"/>
+
+  <path d="M73 164C88 150 97 144 110 144C123 144 132 150 147 164" stroke="url(#goldGrad)" stroke-width="6" stroke-linecap="round"/>
+  <path d="M92 172H128" stroke="#102B50" stroke-width="5" stroke-linecap="round"/>
+
+  <text x="110" y="132" text-anchor="middle" font-size="28" font-weight="700" fill="#F7FAFF" font-family="Arial, Helvetica, sans-serif">MD</text>
+</svg>
