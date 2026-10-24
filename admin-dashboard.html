@@ -1,90 +1,140 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Admin Dashboard | Monze Day Secondary School</title>
-  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-  <style>
-    * { box-sizing: border-box; }
-    body {
-      margin: 0;
-      font-family: Arial, sans-serif;
-      background: #f1f5f9;
-      color: #172033;
-    }
-    header {
-      background: #123b68;
-      color: white;
-      padding: 20px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      gap: 12px;
-      flex-wrap: wrap;
-    }
-    header h1 { margin: 0; font-size: 21px; }
-    button {
-      cursor: pointer;
-      border: 0;
-      border-radius: 6px;
-      padding: 12px 16px;
-      font-size: 15px;
-    }
-    .logout { background: white; color: #123b68; }
-    main { max-width: 950px; margin: 25px auto; padding: 0 15px; }
-    .card {
-      background: white;
-      padding: 22px;
-      margin-bottom: 20px;
-      border-radius: 10px;
-      box-shadow: 0 2px 8px #0000000c;
-    }
-    h2 { margin-top: 0; color: #123b68; }
-    label { display: block; margin: 14px 0 6px; font-weight: bold; }
-    input, select {
-      width: 100%;
-      padding: 12px;
-      border: 1px solid #cbd5e1;
-      border-radius: 6px;
-      font-size: 16px;
-      background: white;
-    }
-    .primary { background: #176b43; color: white; margin-top: 16px; }
-    .secondary { background: #123b68; color: white; }
-    #status { margin-top: 14px; white-space: pre-wrap; }
-    .table-wrap { overflow-x: auto; }
-    table { width: 100%; border-collapse: collapse; margin-top: 12px; }
-    th, td { padding: 12px; text-align: left; border-bottom: 1px solid #e2e8f0; }
-    th { background: #edf3f8; }
-    #app { display: none; }
-    .muted { color: #64748b; }
-    footer { text-align: center; padding: 20px; color: #64748b; }
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Admin Dashboard | Monze Day Student Portal</title>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<style>
+:root {
+  --blue: #2167dc;
+  --dark: #152b4d;
+  --muted: #65748b;
+  --light: #f1f6ff;
+  --border: #dfe7f2;
+}
+* { box-sizing: border-box; }
+body {
+  margin: 0;
+  font-family: Arial, Helvetica, sans-serif;
+  background: #fff;
+  color: var(--dark);
+}
+header {
+  padding: 20px 5%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 15px;
+  border-bottom: 1px solid var(--border);
+  flex-wrap: wrap;
+}
+.brand { display: flex; align-items: center; gap: 14px; }
+.logo {
+  width: 64px; height: 64px;
+  border-radius: 20px;
+  background: var(--blue);
+  color: white;
+  display: grid; place-items: center;
+  font-size: 25px; font-weight: bold;
+}
+.brand h1 { font-size: 21px; margin: 0 0 6px; }
+.brand p {
+  margin: 0; font-size: 12px;
+  letter-spacing: 3px; color: var(--muted);
+}
+button, .button {
+  border: 0; border-radius: 12px;
+  padding: 14px 19px; font-size: 15px;
+  font-weight: bold; cursor: pointer;
+  text-decoration: none; display: inline-block;
+}
+.blue { background: var(--blue); color: white; }
+.white { background: white; color: var(--dark); border: 1px solid var(--border); }
+main { max-width: 1050px; margin: auto; padding: 35px 20px; }
+.hero {
+  background: linear-gradient(135deg, #edf4ff, #f8faff);
+  border-radius: 24px; padding: 35px;
+  margin-bottom: 25px;
+}
+.badge {
+  display: inline-block; background: #dceaff;
+  color: #2464c8; border-radius: 30px;
+  padding: 10px 16px; font-weight: bold;
+  letter-spacing: 1px; font-size: 13px;
+}
+.hero h2 { font-size: clamp(30px, 5vw, 45px); margin: 20px 0 12px; }
+.hero p { color: var(--muted); font-size: 17px; line-height: 1.7; }
+.grid {
+  display: grid; grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 22px;
+}
+.card {
+  background: white; border: 1px solid var(--border);
+  border-radius: 18px; padding: 25px;
+  box-shadow: 0 8px 25px #183b6908;
+  margin-bottom: 22px;
+}
+.card h3 { margin-top: 0; font-size: 22px; }
+label { display: block; font-weight: bold; margin: 16px 0 8px; }
+input, select {
+  width: 100%; padding: 14px;
+  border: 1px solid #cbd7e7; border-radius: 10px;
+  background: white; color: var(--dark); font-size: 16px;
+}
+form button { margin-top: 18px; width: 100%; }
+.message { margin-top: 15px; line-height: 1.5; overflow-wrap: anywhere; }
+.muted { color: var(--muted); }
+.table-wrap { overflow-x: auto; }
+table { width: 100%; border-collapse: collapse; min-width: 420px; }
+th, td { text-align: left; padding: 13px 10px; border-bottom: 1px solid var(--border); }
+th { background: var(--light); }
+#app { display: none; }
+#loading { padding: 35px; text-align: center; }
+footer { text-align: center; padding: 25px; color: var(--muted); border-top: 1px solid var(--border); }
+@media(max-width: 650px) {
+  header { padding: 16px; }
+  .brand h1 { font-size: 16px; }
+  .logo { width: 52px; height: 52px; border-radius: 16px; }
+  .grid { grid-template-columns: 1fr; }
+  .hero { padding: 25px 20px; }
+  main { padding: 24px 15px; }
+  .card { padding: 20px; }
+}
+</style>
 </head>
 <body>
-  <header>
-    <h1>🎓 Monze Day — Admin Dashboard</h1>
-    <button class="logout" id="logoutButton">Log Out</button>
-  </header>
-
-  <div id="loading" style="padding:30px;text-align:center">
-    Checking administrator access...
+<header>
+  <div class="brand">
+    <div class="logo">MD</div>
+    <div>
+      <h1>Monze Day Secondary School</h1>
+      <p>STUDENT PORTAL</p>
+    </div>
   </div>
+  <button id="logoutButton" class="blue">Log Out</button>
+</header>
 
-  <main id="app">
+<div id="loading">Checking administrator access...</div>
+
+<main id="app">
+  <section class="hero">
+    <span class="badge">ADMIN DASHBOARD</span>
+    <h2>Manage your school portal.</h2>
+    <p>Add student records and view the information saved in the school database.</p>
+    <a href="index.html" class="button white">Back to Homepage</a>
+  </section>
+
+  <div class="grid">
     <section class="card">
-      <h2>Add Student</h2>
+      <h3>🎓 Add Student</h3>
       <p class="muted">Enter the student's details below.</p>
-
       <form id="studentForm">
         <label for="studentNumber">Student Number</label>
-        <input id="studentNumber" required maxlength="50"
-               placeholder="e.g. MD001">
+        <input id="studentNumber" maxlength="50" required placeholder="e.g. MD001">
 
         <label for="fullName">Full Name</label>
-        <input id="fullName" required maxlength="150"
-               placeholder="Enter student's full name">
+        <input id="fullName" maxlength="150" required placeholder="Student's full name">
 
         <label for="className">Class</label>
         <select id="className" required>
@@ -95,179 +145,134 @@
           <option>Form 4</option>
           <option>Form 5</option>
         </select>
-
-        <button class="primary" type="submit">Save Student</button>
+        <button type="submit" class="blue">Save Student</button>
       </form>
-      <div id="status" role="status"></div>
+      <div id="status" class="message" role="status"></div>
     </section>
 
     <section class="card">
-      <h2>Student Records</h2>
-      <button class="secondary" id="refreshButton" type="button">
-        Refresh Records
-      </button>
-      <p class="muted">Student records saved in the database appear here.</p>
-
+      <h3>📋 Student Records</h3>
+      <p class="muted">View student records stored in the database.</p>
+      <button id="refreshButton" class="white" type="button">Refresh Records</button>
+      <p id="recordStatus" class="muted"></p>
       <div class="table-wrap">
         <table>
-          <thead>
-            <tr>
-              <th>Student Number</th>
-              <th>Full Name</th>
-              <th>Class</th>
-            </tr>
-          </thead>
+          <thead><tr><th>Student Number</th><th>Full Name</th><th>Class</th></tr></thead>
           <tbody id="studentRows">
             <tr><td colspan="3">Loading records...</td></tr>
           </tbody>
         </table>
       </div>
     </section>
-  </main>
+  </div>
+</main>
 
-  <footer>Monze Day Secondary School | Student Portal</footer>
+<footer>Monze Day Secondary School | Student Portal</footer>
 
-  <script>
-    const SUPABASE_URL = "https://rlgdmvgkzckvjzgcduyg.supabase.co";
-    const SUPABASE_PUBLISHABLE_KEY =
-      "sb_publishable_h4jpZGxZ7EwwSxM6sq9K8A_2Cx7K1IG";
+<script>
+const SUPABASE_URL = "https://rlgdmvgkzckvjzgcduyg.supabase.co";
+const SUPABASE_PUBLISHABLE_KEY = "sb_publishable_h4jpZGxZ7EwwSxM6sq9K8A_2Cx7K1IG";
+const client = window.supabase.createClient(SUPABASE_URL, SUPABASE_PUBLISHABLE_KEY);
 
-    const client = window.supabase.createClient(
-      SUPABASE_URL,
-      SUPABASE_PUBLISHABLE_KEY
-    );
+const loading = document.getElementById("loading");
+const app = document.getElementById("app");
+const statusBox = document.getElementById("status");
+const studentRows = document.getElementById("studentRows");
+let authorized = false;
 
-    const loading = document.getElementById("loading");
-    const app = document.getElementById("app");
-    const statusBox = document.getElementById("status");
-    const studentRows = document.getElementById("studentRows");
-
-    let authorized = false;
-
-    async function checkAdminAccess() {
-      try {
-        const { data: { user }, error: authError } =
-          await client.auth.getUser();
-
-        if (authError || !user) {
-          window.location.replace("login.html");
-          return;
-        }
-
-        const { data: roleRecord, error: roleError } = await client
-          .from("user_roles")
-          .select("role")
-          .eq("id", user.id)
-          .maybeSingle();
-
-        if (roleError || !roleRecord || roleRecord.role !== "admin") {
-          loading.textContent =
-            "Access denied. This account is not an administrator.";
-          await client.auth.signOut();
-          return;
-        }
-
-        authorized = true;
-        loading.style.display = "none";
-        app.style.display = "block";
-        await loadStudents();
-      } catch (error) {
-        loading.textContent =
-          "Could not verify access. Check your internet connection and reload.";
-      }
+async function checkAdminAccess() {
+  try {
+    const { data: { user }, error } = await client.auth.getUser();
+    if (error || !user) {
+      window.location.replace("login.html");
+      return;
     }
 
-    document.getElementById("studentForm").addEventListener(
-      "submit", async function(event) {
-        event.preventDefault();
+    const { data: roleRecord, error: roleError } = await client
+      .from("user_roles").select("role").eq("id", user.id).maybeSingle();
 
-        if (!authorized) return;
-
-        const student_number =
-          document.getElementById("studentNumber").value.trim();
-        const full_name =
-          document.getElementById("fullName").value.trim();
-        const class_name =
-          document.getElementById("className").value;
-
-        statusBox.textContent = "Saving student...";
-
-        const { error } = await client.from("students").insert([{
-          student_number,
-          full_name,
-          class_name
-        }]);
-
-        if (error) {
-          statusBox.textContent =
-            error.code === "23505"
-              ? "That student number already exists. Use a unique number."
-              : "Could not save student: " + error.message;
-          return;
-        }
-
-        statusBox.textContent = "Student saved successfully!";
-        this.reset();
-        await loadStudents();
-      }
-    );
-
-    async function loadStudents() {
-      if (!authorized) return;
-
-      studentRows.innerHTML =
-        '<tr><td colspan="3">Loading records...</td></tr>';
-
-      const { data, error } = await client
-        .from("students")
-        .select("student_number, full_name, class_name")
-        .order("student_number", { ascending: true });
-
-      if (error) {
-        studentRows.innerHTML =
-          '<tr><td colspan="3">Could not load records: ' +
-          escapeHTML(error.message) + '</td></tr>';
-        return;
-      }
-
-      if (!data || data.length === 0) {
-        studentRows.innerHTML =
-          '<tr><td colspan="3">No student records yet.</td></tr>';
-        return;
-      }
-
-      studentRows.innerHTML = data.map(student =>
-        '<tr><td>' + escapeHTML(student.student_number) +
-        '</td><td>' + escapeHTML(student.full_name) +
-        '</td><td>' + escapeHTML(student.class_name) +
-        '</td></tr>'
-      ).join("");
+    if (roleError || !roleRecord || roleRecord.role !== "admin") {
+      loading.textContent = "Access denied. This account is not an administrator.";
+      await client.auth.signOut();
+      return;
     }
 
-    function escapeHTML(value) {
-      return String(value).replace(/[&<>"']/g, function(char) {
-        return {
-          "&": "&amp;",
-          "<": "&lt;",
-          ">": "&gt;",
-          '"': "&quot;",
-          "'": "&#39;"
-        }[char];
-      });
-    }
+    authorized = true;
+    loading.style.display = "none";
+    app.style.display = "block";
+    await loadStudents();
+  } catch (e) {
+    loading.textContent = "Unable to check access. Please reload and try again.";
+  }
+}
 
-    document.getElementById("refreshButton").addEventListener(
-      "click", loadStudents
-    );
+document.getElementById("studentForm").addEventListener("submit", async function(e) {
+  e.preventDefault();
+  if (!authorized) return;
 
-    document.getElementById("logoutButton").addEventListener(
-      "click", async function() {
-        await client.auth.signOut();
-        window.location.replace("login.html");
-      }
-    );
+  const student_number = document.getElementById("studentNumber").value.trim();
+  const full_name = document.getElementById("fullName").value.trim();
+  const class_name = document.getElementById("className").value;
 
-    checkAdminAccess();
-  </script>
+  statusBox.textContent = "Saving student...";
+  const { error } = await client.from("students").insert([
+    { student_number, full_name, class_name }
+  ]);
+
+  if (error) {
+    statusBox.textContent = error.code === "23505"
+      ? "That student number already exists. Please use a unique number."
+      : "Could not save student: " + error.message;
+    return;
+  }
+
+  statusBox.textContent = "Student saved successfully!";
+  this.reset();
+  await loadStudents();
+});
+
+function escapeHTML(value) {
+  return String(value).replace(/[&<>"']/g, c => ({
+    "&":"&amp;", "<":"&lt;", ">":"&gt;", '"':"&quot;", "'":"&#39;"
+  })[c]);
+}
+
+async function loadStudents() {
+  if (!authorized) return;
+  studentRows.innerHTML = '<tr><td colspan="3">Loading records...</td></tr>';
+
+  const { data, error } = await client.from("students")
+    .select("student_number,full_name,class_name")
+    .order("student_number");
+
+  if (error) {
+    studentRows.innerHTML = '<tr><td colspan="3">Could not load records.</td></tr>';
+    document.getElementById("recordStatus").textContent = error.message;
+    return;
+  }
+
+  document.getElementById("recordStatus").textContent =
+    data.length + " student record(s)";
+
+  if (!data.length) {
+    studentRows.innerHTML = '<tr><td colspan="3">No students added yet.</td></tr>';
+    return;
+  }
+
+  studentRows.innerHTML = data.map(s =>
+    '<tr><td>' + escapeHTML(s.student_number) +
+    '</td><td>' + escapeHTML(s.full_name) +
+    '</td><td>' + escapeHTML(s.class_name) + '</td></tr>'
+  ).join("");
+}
+
+document.getElementById("refreshButton").addEventListener("click", loadStudents);
+document.getElementById("logoutButton").addEventListener("click", async () => {
+  await client.auth.signOut();
+  window.location.replace("login.html");
+});
+
+checkAdminAccess();
+</script>
 </body>
-          </html>
+</html>
