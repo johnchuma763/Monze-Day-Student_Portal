@@ -515,31 +515,15 @@
           throw new Error("This account is already registered as a student.");
         }
 
-        const { error: roleInsertError } = await client
-          .from("user_roles")
-          .insert({
-            id: accountId,
-            role: "student"
-          });
+        const { error: registrationError } = await client.rpc("register_student_account", {
+          p_student_number: studentNumber,
+          p_full_name: fullName,
+          p_class_name: className
+        });
 
-        if (roleInsertError) {
+        if (registrationError) {
           await client.auth.signOut();
           throw new Error("The student role could not be assigned. Please contact the school administrator for help.");
-        }
-
-        const { error: profileInsertError } = await client
-          .from("student_profiles")
-          .insert({
-            id: accountId,
-            student_number: studentNumber,
-            full_name: fullName,
-            class_name: className,
-            created_at: new Date().toISOString()
-          });
-
-        if (profileInsertError) {
-          await client.auth.signOut();
-          throw new Error("Your account was created, but the student profile could not be saved. Please contact the school administrator so the profile can be fixed before login.");
         }
 
         setMessage(
