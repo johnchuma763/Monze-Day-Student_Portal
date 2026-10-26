@@ -143,7 +143,8 @@
       font-weight: 700;
     }
 
-    input {
+    input,
+    select {
       width: 100%;
       min-height: 52px;
       padding: 14px;
@@ -156,7 +157,8 @@
       font-size: 15px;
     }
 
-    input:focus {
+    input:focus,
+    select:focus {
       border-color: var(--blue);
       box-shadow: 0 0 0 3px #1769e81b;
     }
@@ -346,7 +348,13 @@
 
           <div>
             <label for="className">Class</label>
-            <input id="className" name="className" type="text" placeholder="e.g. Grade 10A" required>
+            <select id="className" name="className" required>
+              <option value="">Select your class</option>
+              <option value="Form 1">Form 1</option>
+              <option value="Form 2">Form 2</option>
+              <option value="Form 3">Form 3</option>
+              <option value="Form 4">Form 4</option>
+            </select>
           </div>
 
           <div>
@@ -397,6 +405,7 @@
   <script>
     const SUPABASE_URL = "https://rlgdmvgkzckvjzgcduyg.supabase.co";
     const SUPABASE_PUBLISHABLE_KEY = "sb_publishable_h4jpZGxZ7EwwSxM6sq9K8A_2Cx7K1IG";
+    const VALID_CLASSES = ["Form 1", "Form 2", "Form 3", "Form 4"];
 
     const client = window.supabase.createClient(
       SUPABASE_URL,
@@ -444,6 +453,11 @@
         return;
       }
 
+      if (!VALID_CLASSES.includes(className)) {
+        setMessage("Please choose a valid class: Form 1, Form 2, Form 3, or Form 4.", "error");
+        return;
+      }
+
       if (password.length < 8) {
         setMessage("Your password must be at least 8 characters long.", "error");
         return;
@@ -481,39 +495,56 @@
 
         const accountId = data.user.id;
 
-        const { data: profileData, error: profileError } = await client
+        const { data: roleRecord, error: roleCheckError } = await client
           .from("user_roles")
           .select("role")
           .eq("id", accountId)
           .maybeSingle();
 
-        if (profileError) {
-          throw profileError;
+        if (roleCheckError) {
+          throw roleCheckError;
         }
 
-        if (profileData && profileData.role && ["admin", "teacher"].includes(profileData.role)) {
+        if (roleRecord && ["admin", "teacher"].includes(roleRecord.role)) {
           await client.auth.signOut();
           throw new Error("Admin or teacher roles are not allowed for student registration.");
         }
 
-        const { error: updateError } = await client
+        if (roleRecord && roleRecord.role === "student") {
+          await client.auth.signOut();
+          throw new Error("This account is already registered as a student.");
+        }
+
+        const { error: roleInsertError } = await client
           .from("user_roles")
           .insert({
             id: accountId,
-            role: "student",
-            full_name: fullName,
-            student_number: studentNumber,
-            class_name: className,
-            email: email
+            role: "student"
           });
 
-        if (updateError) {
-          throw updateError;
+        if (roleInsertError) {
+          await client.auth.signOut();
+          throw new Error("The student role could not be assigned. Please contact the school administrator for help.");
+        }
+
+        const { error: profileInsertError } = await client
+          .from("student_profiles")
+          .insert({
+            id: accountId,
+            student_number: studentNumber,
+            full_name: fullName,
+            class_name: className,
+            created_at: new Date().toISOString()
+          });
+
+        if (profileInsertError) {
+          await client.auth.signOut();
+          throw new Error("Your account was created, but the student profile could not be saved. Please contact the school administrator so the profile can be fixed before login.");
         }
 
         setMessage(
-          "Registration submitted successfully. Your details are awaiting administrator verification. " +
-          "The school administrator must verify your information and link your account to the correct student profile before access is granted.",
+          "Registration submitted successfully. Your student profile has been created and your student role has been assigned. " +
+          "The school administrator must verify your information before access is granted.",
           "success"
         );
 
