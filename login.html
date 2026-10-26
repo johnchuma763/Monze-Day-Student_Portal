@@ -40,6 +40,21 @@
   .sign-in { width:100%; min-height:54px; margin-top:27px; padding:15px; border:0; border-radius:12px; background:var(--blue); color:#fff; font-size:16px; font-weight:700; cursor:pointer; transition:background .2s ease; }
   .sign-in:hover { background:#1057c5; }
   .sign-in:disabled { opacity:.65; cursor:wait; }
+  .create-account-link {
+    display:block;
+    margin-top:16px;
+    color:var(--blue);
+    font-size:14px;
+    font-weight:700;
+    text-align:center;
+    text-decoration:none;
+    transition:opacity .2s ease;
+  }
+  .create-account-link:hover,
+  .create-account-link:focus-visible {
+    text-decoration:underline;
+    opacity:0.9;
+  }
   .security { display:flex; align-items:flex-start; gap:10px; margin-top:23px; padding:14px; border-radius:12px; background:var(--light-blue); color:#58739b; font-size:12px; line-height:1.6; }
   .security strong { color:var(--blue); }
   #message { margin:15px 0 0; font-size:13px; line-height:1.6; overflow-wrap:anywhere; }
@@ -47,7 +62,7 @@
   #message.success { color:#16845b; }
   .back { display:block; margin-top:24px; padding-top:21px; border-top:1px solid #e7edf6; color:var(--blue); text-align:center; font-size:14px; font-weight:700; text-decoration:none; }
   footer { padding:23px 15px; background:#fff; border-top:1px solid #e4ebf5; color:var(--muted); font-size:12px; text-align:center; }
-  @media (max-width:480px) { header { padding:16px; } .logo { width:52px; height:52px; } .brand { gap:10px; } .brand p { font-size:9px; letter-spacing:2px; } .home-link { font-size:12px; } main { padding-top:26px; } .card { padding:20px; } }
+  @media (max-width:480px) { header { padding:16px; } .logo { width:52px; height:52px; } .brand { gap:10px; } .brand p { font-size:9px; letter-spacing:2px; } .home-link { font-size:12px; } main { padding:28px 14px 35px; } .card { padding:22px 16px; border-radius:18px; } .sign-in { min-height:52px; } .create-account-link { font-size:13px; } }
 </style>
 </head>
 <body>
@@ -88,6 +103,7 @@
       </div>
 
       <button class="sign-in" id="loginButton" type="submit"><span id="buttonText">Sign In</span> →</button>
+      <a class="create-account-link" href="signup.html">New student? Create an account</a>
       <p id="message" role="status" aria-live="polite"></p>
     </form>
 
